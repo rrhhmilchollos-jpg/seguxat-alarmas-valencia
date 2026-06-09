@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Seguridad — Alarmas, Sentinel GPS y más | Seguxat Valencia</title>
+  <meta name="description" content="Catálogo completo de sistemas de seguridad Seguxat: alarmas hogar, alarmas negocio, relojes GPS SOS Sentinel y Escudo Vecinal. Precios transparentes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #0A1628; --accent: #FF6B00; --accent-hover: #E55D00;
+      --white: #fff; --gray-50: #F9FAFB; --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB; --gray-400: #9CA3AF; --gray-500: #6B7280;
+      --gray-700: #374151; --gray-800: #1F2937;
+      --radius-md: 12px; --radius-lg: 16px; --radius-xl: 24px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08); --shadow-md: 0 4px 16px rgba(0,0,0,.1); --shadow-lg: 0 10px 40px rgba(0,0,0,.14);
+      --transition: all .2s ease;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--gray-800); background: var(--white); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; }
+    .text-center { text-align: center; }
+    .section-heading { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800; color: var(--primary); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .section-subheading { font-size: 1.1rem; color: var(--gray-500); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: var(--radius-md); font-weight: 700; font-size: 0.95rem; cursor: pointer; border: 2px solid transparent; transition: var(--transition); text-decoration: none; }
+    .btn-xl { padding: 16px 36px; font-size: 1.05rem; border-radius: var(--radius-lg); }
+    .btn-lg { padding: 14px 28px; font-size: 1rem; }
+    .btn-sm { padding: 8px 16px; font-size: 0.82rem; border-radius: 6px; }
+    .btn-primary { background: var(--accent); color: var(--white); border-color: var(--accent); }
+    .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,107,0,.35); }
+    .btn-outline { background: transparent; color: var(--primary); border-color: var(--gray-300); }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-outline-white { background: transparent; color: var(--white); border-color: rgba(255,255,255,.5); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.1); border-color: var(--white); }
+    .btn-login { background: rgba(255,255,255,.1); color: var(--white); border-color: rgba(255,255,255,.25); }
+    .btn-full { width: 100%; justify-content: center; }
+    .navbar { position: sticky; top: 0; z-index: 1000; background: rgba(10,22,40,.95); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,.07); }
+    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .nav-logo-text { font-size: 1.2rem; font-weight: 900; color: var(--white); letter-spacing: -0.02em; }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-menu { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-menu a { color: rgba(255,255,255,.75); font-size: 0.875rem; font-weight: 500; padding: 6px 12px; border-radius: 6px; transition: var(--transition); }
+    .nav-menu a:hover { color: var(--white); background: rgba(255,255,255,.08); }
+    .nav-menu a.active { color: var(--accent) !important; background: rgba(255,107,0,.12); }
+    .nav-badge { background: var(--accent); color: var(--white); font-size: 0.6rem; font-weight: 800; padding: 2px 6px; border-radius: 10px; text-transform: uppercase; margin-left: 4px; vertical-align: middle; }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: rgba(255,255,255,.8); border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; inset: 0; z-index: 2000; background: var(--primary); flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 40px 24px; }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu a { color: var(--white); font-size: 1.2rem; font-weight: 600; padding: 12px 24px; border-radius: 10px; width: 100%; max-width: 320px; text-align: center; background: rgba(255,255,255,.05); }
+    .mobile-menu-close { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,.1); border: none; color: var(--white); font-size: 1.4rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .mobile-menu-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 320px; margin-top: 8px; }
+    .page-hero { background: linear-gradient(160deg, var(--primary) 0%, #0D2044 60%, #0A1628 100%); padding: 80px 0 64px; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(255,107,0,.08) 0%, transparent 60%); pointer-events: none; }
+    .page-hero-content { position: relative; z-index: 2; }
+    .page-hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,107,0,.15); border: 1px solid rgba(255,107,0,.3); color: #FF9445; padding: 7px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; }
+    .page-hero h1 { color: var(--white); font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; }
+    .page-hero h1 .highlight { color: var(--accent); }
+    .page-hero-sub { font-size: 1.1rem; color: rgba(255,255,255,.7); line-height: 1.7; max-width: 560px; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: rgba(255,255,255,.5); margin-bottom: 24px; }
+    .breadcrumb a { color: rgba(255,255,255,.5); transition: var(--transition); }
+    .breadcrumb a:hover { color: var(--white); }
+    .breadcrumb .sep { color: rgba(255,255,255,.3); }
+    .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
+    .filter-btn { padding: 8px 20px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: 2px solid var(--gray-200); background: var(--white); color: var(--gray-700); transition: var(--transition); }
+    .filter-btn:hover, .filter-btn.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+    .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; }
+    .catalog-card { background: var(--white); border: 2px solid var(--gray-200); border-radius: var(--radius-xl); overflow: hidden; transition: var(--transition); position: relative; }
+    .catalog-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .catalog-card.featured { border-color: var(--accent); }
+    .card-badge { position: absolute; top: 16px; right: 16px; background: var(--accent); color: var(--white); font-size: 0.7rem; font-weight: 800; padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .card-img { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+    .card-body { padding: 24px; }
+    .card-category { font-size: 0.72rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .card-name { font-size: 1.15rem; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
+    .card-desc { font-size: 0.85rem; color: var(--gray-500); line-height: 1.6; margin-bottom: 16px; }
+    .card-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 16px; }
+    .card-price-main { font-size: 1.8rem; font-weight: 900; color: var(--primary); }
+    .card-price-sub { font-size: 0.85rem; color: var(--gray-500); }
+    .card-features { list-style: none; margin-bottom: 20px; }
+    .card-features li { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--gray-700); margin-bottom: 7px; }
+    .card-features li::before { content: '✓'; color: var(--accent); font-weight: 800; flex-shrink: 0; }
+    .sentinel-section { background: linear-gradient(135deg, var(--primary), #0D2044); padding: 80px 0; }
+    .sentinel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .sentinel-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius-xl); padding: 32px; color: var(--white); transition: var(--transition); }
+    .sentinel-card:hover { background: rgba(255,255,255,.08); transform: translateY(-4px); }
+    .sentinel-card-icon { font-size: 3rem; margin-bottom: 16px; }
+    .sentinel-card-name { font-size: 1.15rem; font-weight: 800; margin-bottom: 8px; }
+    .sentinel-card-desc { font-size: 0.875rem; color: rgba(255,255,255,.65); line-height: 1.65; margin-bottom: 20px; }
+    .sentinel-card-price { font-size: 2rem; font-weight: 900; color: var(--accent); margin-bottom: 4px; line-height: 1; }
+    .sentinel-card-price-sub { font-size: 0.82rem; color: rgba(255,255,255,.5); margin-bottom: 20px; }
+    .sentinel-features { list-style: none; margin-bottom: 24px; }
+    .sentinel-features li { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: rgba(255,255,255,.8); margin-bottom: 8px; }
+    .sentinel-features li::before { content: '✓'; color: var(--accent); font-weight: 800; }
+    .cta-section { background: linear-gradient(135deg, var(--accent), #E55D00); padding: 100px 0; position: relative; overflow: hidden; }
+    .cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,.08) 0%, transparent 60%); }
+    .cta-inner { position: relative; z-index: 1; }
+    .cta-inner h2 { font-size: clamp(1.8rem, 4.5vw, 3rem); color: var(--white); font-weight: 900; margin-bottom: 16px; }
+    .cta-inner p { font-size: 1.1rem; color: rgba(255,255,255,.85); margin-bottom: 40px; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-note { margin-top: 24px; font-size: 0.85rem; color: rgba(255,255,255,.7); }
+    .footer { background: var(--primary); padding: 72px 0 32px; color: rgba(255,255,255,.65); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .footer-logo-text { font-size: 1.1rem; font-weight: 900; color: var(--white); }
+    .footer-logo-text span { color: var(--accent); }
+    .footer-desc { font-size: 0.875rem; line-height: 1.7; margin-bottom: 20px; }
+    .footer-contact-item { font-size: 0.82rem; margin-bottom: 8px; }
+    .footer-contact-item a { color: rgba(255,255,255,.7); transition: var(--transition); }
+    .footer-contact-item a:hover { color: var(--white); }
+    .footer-col h5 { color: var(--white); font-size: 0.875rem; font-weight: 700; margin-bottom: 16px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { font-size: 0.82rem; color: rgba(255,255,255,.6); transition: var(--transition); }
+    .footer-links a:hover { color: var(--white); }
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,.08); margin: 0 0 24px; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 0.78rem; }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { color: rgba(255,255,255,.5); transition: var(--transition); }
+    .footer-bottom-links a:hover { color: var(--white); }
+    @media (max-width: 1024px) { .nav-menu { display: none; } .nav-hamburger { display: flex; } .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .container { padding: 0 16px; } .section { padding: 64px 0; } .footer-grid { grid-template-columns: 1fr; gap: 32px; } .footer-bottom { flex-direction: column; text-align: center; } .cta-btns { flex-direction: column; align-items: center; } .catalog-grid { grid-template-columns: 1fr; } .sentinel-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-icon">🛡️</div>
+      <span class="nav-logo-text">Seguxat<span>.es</span></span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="/alarmas.html">Alarmas</a></li>
+      <li><a href="/escudo-vecinal.html">Escudo Vecinal <span class="nav-badge">ÚNICO</span></a></li>
+      <li><a href="/catalogo.html" class="active">Catálogo</a></li>
+      <li><a href="/contacto.html">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="/login.html" class="btn btn-login btn-sm">👤 Mi cuenta</a>
+      <a href="/solicitar-visita.html" class="btn btn-primary btn-sm">Presupuesto gratis</a>
+      <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.add('active');document.body.style.overflow='hidden'" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="document.getElementById('mobileMenu').classList.remove('active');document.body.style.overflow=''">&#x2715;</button>
+  <a href="/alarmas.html">🏠 Alarmas Hogar y Empresa</a>
+  <a href="/escudo-vecinal.html">🛡️ Escudo Vecinal</a>
+  <a href="/catalogo.html">📦 Catálogo</a>
+  <a href="/contacto.html">📬 Contacto</a>
+  <div class="mobile-menu-actions">
+    <a href="tel:+34611946289" class="btn btn-outline-white btn-full">📞 611946289</a>
+    <a href="/solicitar-visita.html" class="btn btn-primary btn-full">Presupuesto Gratis</a>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <div class="breadcrumb">
+        <a href="/">Inicio</a><span class="sep">›</span><span>Catálogo</span>
+      </div>
+      <div class="page-hero-eyebrow">📦 Catálogo completo</div>
+      <h1>Todos nuestros<br><span class="highlight">sistemas de seguridad</span></h1>
+      <p class="page-hero-sub">Alarmas hogar, alarmas negocio, relojes GPS SOS Sentinel y Escudo Vecinal. Precios transparentes, instalación gratuita.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fff">
+  <div class="container">
+    <div style="margin-bottom:48px">
+      <h2 class="section-heading">🏠 Alarmas para Hogar</h2>
+      <p class="section-subheading" style="margin:0">Soluciones para pisos, chalets y viviendas de todo tipo. Todas incluyen CRA 24/7 e instalación gratuita.</p>
+    </div>
+    <div class="catalog-grid">
+      <div class="catalog-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE)">🏠</div>
+        <div class="card-body">
+          <div class="card-category">Hogar · Básico</div>
+          <div class="card-name">Kit Básico Hogar</div>
+          <div class="card-desc">Protección esencial para pisos y apartamentos. Sin complicaciones.</div>
+          <div class="card-price"><span class="card-price-main">19,90€</span><span class="card-price-sub">/mes</span></div>
+          <ul class="card-features">
+            <li>Central WiFi 4 zonas</li>
+            <li>Sensor puerta + PIR 12m</li>
+            <li>Sirena interior 85dB</li>
+            <li>App móvil + CRA 24h</li>
+          </ul>
+          <a href="/solicitar-visita.html" class="btn btn-primary btn-full">Solicitar →</a>
+        </div>
+      </div>
+      <div class="catalog-card featured">
+        <div class="card-badge">Popular</div>
+        <div class="card-img" style="background:linear-gradient(135deg,#FFF7ED,#FFEDD5)">🏡</div>
+        <div class="card-body">
+          <div class="card-category">Hogar · Estándar</div>
+          <div class="card-name">Kit Estándar Hogar</div>
+          <div class="card-desc">El más vendido. Ideal para chalets y viviendas unifamiliares.</div>
+          <div class="card-price"><span class="card-price-main">27,90€</span><span class="card-price-sub">/mes</span></div>
+          <ul class="card-features">
+            <li>Central GSM+WiFi 8 zonas</li>
+            <li>2 PIR + 2 sensores apertura</li>
+            <li>Sirena exterior homologada</li>
+            <li>SMS + App + CRA 24h</li>
+          </ul>
+          <a href="/solicitar-visita.html" class="btn btn-primary btn-full">Solicitar →</a>
+        </div>
+      </div>
+      <div class="catalog-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE)">🏰</div>
+        <div class="card-body">
+          <div class="card-category">Hogar · Premium</div>
+          <div class="card-name">Kit Premium Hogar</div>
+          <div class="card-desc">Máxima seguridad con cámaras HD y videoverificación CRA.</div>
+          <div class="card-price"><span class="card-price-main">39,90€</span><span class="card-price-sub">/mes</span></div>
+          <ul class="card-features">
+            <li>Central 4G+WiFi 16 zonas</li>
+            <li>4 PIR cámara + 4 sensores</li>
+            <li>2 cámaras HD 1080p exterior</li>
+            <li>Videoverificación CRA 24h</li>
+          </ul>
+          <a href="/solicitar-visita.html" class="btn btn-primary btn-full">Solicitar →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--gray-50)">
+  <div class="container">
+    <div style="margin-bottom:48px">
+      <h2 class="section-heading">🏢 Alarmas para Negocio</h2>
+      <p class="section-subheading" style="margin:0">Para comercios, oficinas y naves industriales. Certificación EN 50131 Grado 2 y 3.</p>
+    </div>
+    <div class="catalog-grid">
+      <div class="catalog-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7)">🏪</div>
+        <div class="card-body">
+          <div class="card-category">Negocio · S</div>
+          <div class="card-name">Kit Negocio S</div>
+          <div class="card-desc">Para pequeños comercios, bares y tiendas de hasta 100 m².</div>
+          <div class="card-price"><span class="card-price-main">34,90€</span><span class="card-price-sub">/mes</span></div>
+          <ul class="card-features">
+            <li>Central IP 8 zonas</li>
+            <li>2 PIR doble tecnología</li>
+            <li>Contacto pánico</li>
+            <li>CRA 24h + acuse recibo</li>
+          </ul>
+          <a href="/solicitar-visita.html" class="btn btn-primary btn-full">Solicitar →</a>
+        </div>
+      </div>
+      <div class="catalog-card featured">
+        <div class="card-badge">Recomendado</div>
+        <div class="card-img" style="background:linear-gradient(135deg,#FEF9C3,#FEF08A)">🏢</div>
+        <div class="card-body">
+          <div class="card-category">Negocio · M</div>
+          <div class="card-name">Kit Negocio M</div>
+          <div class="card-desc">Oficinas medianas y locales comerciales de hasta 300 m².</div>
+          <div class="card-price"><span class="card-price-main">49,90€</span><span class="card-price-sub">/mes</span></div>
+          <ul class="card-features">
+            <li>Central IP profesional 16 zonas</li>
+            <li>4 PIR anti-enmascaramiento</li>
+            <li>3 cámaras HD 2MP</li>
+            <li>Videoverificación CRA</li>
+          </ul>
+          <a href="/solicitar-visita.html" class="btn btn-primary btn-full">Solicitar →</a>
+        </div>
+      </div>
+      <div class="catalog-card">
+        <div class="card-img" style="background:linear-gradient(135deg,#FFF1F2,#FFE4E6)">🏭</div>
+        <div class="card-body">
+          <div class="card-category">Negocio · L</div>
+          <div class="card-name">Kit Negocio L</div>
+          <div class="card-desc">Naves industriales y grandes empresas. Grado 4.</div>
+          <div class="card-price"><span class="card-price-main">79,90€</span><span class="card-price-sub">/mes</span></div>
+          <ul class="card-features">
+            <li>Central IP 32 zonas BMS</li>
+            <li>8 PIR industrial + 6 sensores</li>
+            <li>4 cámaras 4K PoE exterior</li>
+            <li>Control acceso biométrico</li>
+          </ul>
+          <a href="/solicitar-visita.html" class="btn btn-primary btn-full">Solicitar →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sentinel-section">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:56px">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,0,.15);border:1px solid rgba(255,107,0,.3);color:#FF9445;padding:7px 16px;border-radius:20px;font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:20px">⌚ Relojes GPS SOS</div>
+      <h2 class="section-heading" style="color:var(--white)">Sentinel GPS — Seguridad personal</h2>
+      <p class="section-subheading" style="color:rgba(255,255,255,.65)">Relojes GPS SOS conectados a CRA 24/7. Para niños, jóvenes y mayores.</p>
+    </div>
+    <div class="sentinel-grid">
+      <div class="sentinel-card">
+        <div class="sentinel-card-icon">👧</div>
+        <div class="sentinel-card-name">Sentinel J — Niños</div>
+        <div class="sentinel-card-desc">GPS en tiempo real, botón SOS, geocercas escolares y del hogar. Ideal para niños de 4 a 12 años.</div>
+        <div class="sentinel-card-price">24,99€</div>
+        <div class="sentinel-card-price-sub">/mes · dispositivo incluido</div>
+        <ul class="sentinel-features">
+          <li>GPS 4G en tiempo real</li>
+          <li>Botón SOS doble pulsación</li>
+          <li>Geocercas personalizadas</li>
+          <li>Chat de voz bidireccional</li>
+          <li>App familiar iOS/Android</li>
+          <li>CRA 24h</li>
+        </ul>
+        <a href="/solicitar-visita.html" class="btn btn-primary btn-full">Solicitar →</a>
+      </div>
+      <div class="sentinel-card" style="border-color:rgba(255,107,0,.4)">
+        <div class="sentinel-card-icon">👦</div>
+        <div class="sentinel-card-name">Sentinel S — Jóvenes</div>
+        <div class="sentinel-card-desc">Diseño moderno para adolescentes. GPS discreto, SOS y zona segura configurable.</div>
+        <div class="sentinel-card-price">29,99€</div>
+        <div class="sentinel-card-price-sub">/mes · dispositivo incluido</div>
+        <ul class="sentinel-features">
+          <li>GPS 4G + WiFi posicionamiento</li>
+          <li>Botón SOS discreto</li>
+          <li>Historial de rutas 30 días</li>
+          <li>Llamadas de emergencia</li>
+          <li>Batería 48h</li>
+          <li>CRA 24h</li>
+        </ul>
+        <a href="/solicitar-visita.html" class="btn btn-primary btn-full">Solicitar →</a>
+      </div>
+      <div class="sentinel-card">
+        <div class="sentinel-card-icon">👴</div>
+        <div class="sentinel-card-name">Sentinel X — Mayores</div>
+        <div class="sentinel-card-desc">Para mayores de 65 años. Detección de caídas automática y botón SOS grande. Certificado IP67.</div>
+        <div class="sentinel-card-price">39,99€</div>
+        <div class="sentinel-card-price-sub">/mes · dispositivo incluido</div>
+        <ul class="sentinel-features">
+          <li>Detección caída automática</li>
+          <li>GPS 4G + botón SOS grande</li>
+          <li>Llamada automática CRA</li>
+          <li>Geocercas zona segura</li>
+          <li>Certificado IP67 resistente agua</li>
+          <li>CRA 24h alertas mayores</li>
+        </ul>
+        <a href="/solicitar-visita.html" class="btn btn-primary btn-full">Solicitar →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fff">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <h2 class="section-heading">🏘️ Escudo Vecinal</h2>
+      <p class="section-subheading">El sistema exclusivo de Seguxat para comunidades de vecinos. Solo disponible en Valencia.</p>
+    </div>
+    <div style="background:linear-gradient(135deg,var(--primary),#0D2044);border-radius:var(--radius-xl);padding:48px;text-align:center;color:var(--white)">
+      <div style="font-size:4rem;margin-bottom:20px">🏘️</div>
+      <div style="font-size:2rem;font-weight:900;margin-bottom:8px">Desde <span style="color:var(--accent)">9,99€</span>/vivienda/mes</div>
+      <div style="font-size:1rem;color:rgba(255,255,255,.7);margin-bottom:32px">Zonas comunes + alarma individual por vivienda + app vecinal + CRA 24/7</div>
+      <a href="/escudo-vecinal.html" class="btn btn-primary btn-xl" style="margin-right:16px">Ver detalles →</a>
+      <a href="/solicitar-visita.html" class="btn btn-outline-white btn-xl">Solicitar presupuesto</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container text-center cta-inner">
+    <h2>¿No encuentras lo que buscas?</h2>
+    <p>Llámanos o solicita visita gratuita. Diseñamos soluciones a medida para cada caso.</p>
+    <div class="cta-btns">
+      <a href="/solicitar-visita.html" class="btn btn-xl" style="background:white;color:var(--accent);font-weight:800">⚡ Visita gratuita</a>
+      <a href="/contacto.html" class="btn btn-xl btn-outline-white">📬 Contactar</a>
+      <a href="tel:+34611946289" class="btn btn-xl btn-outline-white">📞 611946289</a>
+    </div>
+    <p class="cta-note">Presupuesto sin compromiso · Respuesta en menos de 2 horas</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><div class="footer-logo-icon">🛡️</div><span class="footer-logo-text">Seguxat<span>.es</span></span></div>
+        <p class="footer-desc">Empresa de seguridad local en Xàtiva, Valencia.</p>
+        <div class="footer-contact-item">📞 <a href="tel:+34611946289">+34 611946289</a></div>
+        <div class="footer-contact-item">✉️ <a href="mailto:info@seguxat.es">info@seguxat.es</a></div>
+        <div class="footer-contact-item">📍 Xàtiva, Valencia, España</div>
+      </div>
+      <div class="footer-col">
+        <h5>Servicios</h5>
+        <ul class="footer-links">
+          <li><a href="/alarmas.html">Alarmas Hogar</a></li>
+          <li><a href="/escudo-vecinal.html">Escudo Vecinal</a></li>
+          <li><a href="/catalogo.html">Catálogo</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Empresa</h5>
+        <ul class="footer-links">
+          <li><a href="/sobre-nosotros.html">Sobre nosotros</a></li>
+          <li><a href="/contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="footer-bottom">
+      <p>© 2025 Seguxat Seguridad S.L. · Todos los derechos reservados</p>
+      <div class="footer-bottom-links">
+        <a href="/privacidad.html">Privacidad</a>
+        <a href="/aviso-legal.html">Aviso Legal</a>
+        <a href="/cookies.html">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
