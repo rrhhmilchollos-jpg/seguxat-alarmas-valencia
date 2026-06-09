@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Seguxat – App Comercial</title>
+<link rel="icon" href="../images/icon-comercial-512.png">
+<link rel="apple-touch-icon" href="../images/icon-comercial-512.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#d4a843">
+<meta name="apple-mobile-web-app-title" content="Comercial">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<style>
+:root{
+  --navy:#0a1628;--navy2:#1a2a4a;--navy3:#243550;
+  --gold:#f0c040;--gold2:#d4a820;
+  --green:#10b981;--green2:#059669;
+  --red:#ef4444;--red2:#dc2626;
+  --orange:#f59e0b;--blue:#3b82f6;--purple:#8b5cf6;
+  --bg:#f0f4f8;--card:#fff;--text:#1e293b;--text2:#64748b;
+  --border:#e2e8f0;--radius:14px;--shadow:0 2px 16px rgba(0,0,0,0.08);
+  --header-h:60px;--nav-h:64px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
+.app-header{height:var(--header-h);background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-shrink:0;position:relative;z-index:100;}
+.header-brand{display:flex;align-items:center;gap:10px}
+.header-logo{width:32px;height:32px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--navy);font-size:1rem}
+.header-title{font-weight:700;font-size:0.95rem;line-height:1.1}
+.header-subtitle{font-size:0.72rem;color:rgba(255,255,255,0.6);font-weight:400}
+.header-actions{display:flex;gap:8px;align-items:center}
+.btn-icon{width:36px;height:36px;border-radius:8px;border:none;background:rgba(255,255,255,0.1);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.85rem;transition:background .2s}
+.btn-icon:hover,.btn-icon:active{background:rgba(255,255,255,0.2)}
+.comercial-badge{background:var(--gold);color:var(--navy);font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:10px}
+.app-main{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.bottom-nav{height:var(--nav-h);background:var(--navy);display:flex;align-items:stretch;flex-shrink:0;border-top:1px solid rgba(255,255,255,0.08);}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:rgba(255,255,255,0.45);cursor:pointer;border:none;background:none;font-family:inherit;font-size:0.62rem;font-weight:500;transition:all .2s;padding:6px 2px;position:relative;}
+.nav-item.active{color:var(--gold)}
+.nav-item .nav-icon{font-size:1.15rem}
+.nav-item .nav-badge{position:absolute;top:6px;right:calc(50% - 14px);background:var(--red);color:#fff;font-size:0.55rem;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.screen{display:none;padding:16px;min-height:100%}
+.screen.active{display:block}
+.card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:16px}
+.card-title{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.card-desc{font-size:0.8rem;color:var(--text2);margin-bottom:16px}
+.form-group{margin-bottom:14px}
+label{display:block;font-size:0.78rem;font-weight:600;color:var(--text);margin-bottom:5px}
+input,select,textarea{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:0.88rem;font-family:inherit;color:var(--text);background:#fff;transition:border .2s;outline:none;}
+input:focus,select:focus,textarea:focus{border-color:var(--navy2)}
+textarea{resize:vertical;min-height:80px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:10px;font-family:inherit;font-weight:600;font-size:0.88rem;cursor:pointer;border:none;transition:all .2s;}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover,.btn-primary:active{background:var(--navy2)}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.btn-gold:hover,.btn-gold:active{background:var(--gold2)}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover,.btn-green:active{background:var(--green2)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover,.btn-red:active{background:var(--red2)}
+.btn-outline{background:transparent;border:2px solid var(--navy);color:var(--navy)}
+.btn-sm{padding:8px 14px;font-size:0.78rem;border-radius:8px}
+.btn-full{width:100%;margin-top:8px}
+.btn-lg{padding:15px 24px;font-size:1rem;border-radius:12px}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:0.7rem;font-weight:600}
+.badge-green{background:#dcfce7;color:#15803d}
+.badge-red{background:#fee2e2;color:#b91c1c}
+.badge-orange{background:#fef3c7;color:#92400e}
+.badge-blue{background:#dbeafe;color:#1d4ed8}
+.badge-purple{background:#ede9fe;color:#6d28d9}
+.badge-gray{background:#f1f5f9;color:#475569}
+.wizard-steps{display:flex;align-items:center;margin-bottom:20px;overflow-x:auto;padding-bottom:4px}
+.wizard-step{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;min-width:60px}
+.wizard-step:not(:last-child)::after{content:'';position:absolute;top:14px;left:50%;width:100%;height:2px;background:var(--border);z-index:0;}
+.wizard-step.done:not(:last-child)::after{background:var(--green)}
+.wizard-step.active:not(:last-child)::after{background:var(--border)}
+.step-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;z-index:1;position:relative;background:var(--border);color:var(--text2);transition:all .3s;}
+.wizard-step.done .step-dot{background:var(--green);color:#fff}
+.wizard-step.active .step-dot{background:var(--navy);color:#fff;box-shadow:0 0 0 3px rgba(10,22,40,0.15)}
+.step-label{font-size:0.6rem;color:var(--text2);margin-top:4px;text-align:center;line-height:1.2}
+.wizard-step.active .step-label{color:var(--navy);font-weight:600}
+.wizard-step.done .step-label{color:var(--green)}
+.scanner-area{border:2px dashed var(--border);border-radius:12px;padding:24px;text-align:center;cursor:pointer;background:#fafbfc;transition:all .2s;position:relative;overflow:hidden;}
+.scanner-area:hover,.scanner-area.drag-over{border-color:var(--gold);background:#fffbeb}
+.scanner-area.captured{border-color:var(--green);border-style:solid;background:#f0fdf4}
+.scanner-icon{font-size:2.5rem;color:var(--text2);margin-bottom:10px}
+.scanner-text{font-size:0.82rem;color:var(--text2);line-height:1.5}
+.scanner-preview{max-width:100%;max-height:200px;border-radius:8px;object-fit:contain}
+.ocr-result{background:#f8fafc;border-radius:10px;padding:14px;margin-top:14px;border:1px solid var(--border)}
+.ocr-field{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.82rem}
+.ocr-field:last-child{border-bottom:none}
+.ocr-label{color:var(--text2);font-weight:500}
+.ocr-value{font-weight:600;color:var(--text)}
+.scoring-ring{position:relative;width:120px;height:120px;margin:0 auto 16px}
+.scoring-ring svg{transform:rotate(-90deg)}
+.scoring-ring .score-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.score-num{font-size:1.8rem;font-weight:800;line-height:1}
+.score-lbl{font-size:0.65rem;color:var(--text2);font-weight:500}
+.check-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;margin-bottom:8px;font-size:0.82rem;font-weight:500}
+.check-item.ok{background:#f0fdf4;color:#166534}
+.check-item.fail{background:#fee2e2;color:#991b1b}
+.check-item.checking{background:#fef3c7;color:#92400e}
+.check-item i{width:18px;text-align:center;flex-shrink:0}
+.decision-box{border-radius:12px;padding:20px;text-align:center;margin-top:16px}
+.decision-box.approved{background:linear-gradient(135deg,#dcfce7,#bbf7d0);border:2px solid var(--green)}
+.decision-box.rejected{background:linear-gradient(135deg,#fee2e2,#fecaca);border:2px solid var(--red)}
+.decision-box.pending{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid var(--orange)}
+.decision-icon{font-size:2.5rem;margin-bottom:8px}
+.decision-title{font-size:1.1rem;font-weight:800;margin-bottom:4px}
+.decision-desc{font-size:0.8rem;opacity:0.8}
+.kits-grid{display:flex;flex-direction:column;gap:14px}
+.kit-card{background:var(--card);border:2px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all .2s;}
+.kit-card:hover,.kit-card.selected{border-color:var(--gold);box-shadow:0 0 0 3px rgba(240,192,64,0.15)}
+.kit-card.selected{background:#fffbeb}
+.kit-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.kit-name{font-weight:700;font-size:0.95rem;color:var(--navy)}
+.kit-price{font-size:1.05rem;font-weight:800;color:var(--gold2)}
+.kit-cuota{font-size:0.72rem;color:var(--text2);font-weight:400}
+.kit-features{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.kit-feature{background:#f1f5f9;border-radius:6px;padding:3px 8px;font-size:0.7rem;color:var(--text2);display:flex;align-items:center;gap:4px}
+.kit-image-placeholder{height:100px;background:linear-gradient(135deg,var(--navy) 0%,var(--navy3) 100%);border-radius:8px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:2rem;}
+.kit-selected-check{width:24px;height:24px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;color:var(--navy);font-size:0.8rem;flex-shrink:0;margin-left:auto;}
+.sim-param{background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:12px}
+.sim-label{font-size:0.78rem;font-weight:600;color:var(--text2);margin-bottom:8px}
+.sim-value{font-size:1.1rem;font-weight:700;color:var(--navy)}
+.range-input{width:100%;accent-color:var(--gold);cursor:pointer;height:6px;border-radius:3px}
+.sim-result{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:12px;padding:20px;margin-top:16px;}
+.sim-result-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.sim-result-item .val{font-size:1.3rem;font-weight:800;color:var(--gold)}
+.sim-result-item .lbl{font-size:0.72rem;color:rgba(255,255,255,0.65)}
+.contract-section{background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:12px;border:1px solid var(--border)}
+.contract-section h4{font-size:0.82rem;font-weight:700;color:var(--navy);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.contract-section p,.contract-section li{font-size:0.75rem;color:var(--text2);line-height:1.6}
+.contract-section ul{padding-left:16px}
+.highlight-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.82rem}
+.highlight-row:last-child{border-bottom:none}
+.highlight-row .val{font-weight:700;color:var(--navy)}
+.sig-canvas-wrap{border:2px solid var(--border);border-radius:10px;overflow:hidden;position:relative;touch-action:none}
+#sigCanvas{display:block;cursor:crosshair;background:#fff;width:100%;height:160px}
+.sig-actions{display:flex;gap:8px;margin-top:8px}
+.toast{position:fixed;bottom:calc(var(--nav-h) + 12px);left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;border-radius:10px;padding:12px 20px;font-size:0.82rem;font-weight:500;white-space:nowrap;z-index:9999;opacity:0;transition:all .3s;pointer-events:none;max-width:90vw;display:flex;align-items:center;gap:8px;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.success{background:var(--green)}.toast.error{background:var(--red)}.toast.warning{background:var(--orange);color:var(--navy)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .3s;}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-sheet{background:#fff;border-radius:20px 20px 0 0;padding:24px 20px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(100%);transition:transform .3s;}
+.modal-overlay.open .modal-sheet{transform:translateY(0)}
+.modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 20px}
+.modal-title{font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:4px}
+.modal-desc{font-size:0.82rem;color:var(--text2);margin-bottom:20px}
+.progress-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.progress-fill{height:100%;background:var(--gold);border-radius:3px;transition:width .5s ease}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.stat-box{background:var(--card);border-radius:10px;padding:12px 8px;text-align:center;border:1px solid var(--border)}
+.stat-box .val{font-size:1.3rem;font-weight:800;color:var(--navy);line-height:1}
+.stat-box .lbl{font-size:0.65rem;color:var(--text2);margin-top:2px}
+.list-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .2s;}
+.list-item:hover,.list-item:active{background:#f8fafc;border-color:var(--navy2)}
+.list-avatar{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--navy),var(--navy3));display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1rem;flex-shrink:0;}
+.list-info{flex:1;min-width:0}
+.list-name{font-weight:600;font-size:0.88rem;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.list-sub{font-size:0.73rem;color:var(--text2)}
+.list-meta{text-align:right;flex-shrink:0}
+.loading-spinner{display:inline-block;width:20px;height:20px;border:3px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite;}
+.loading-spinner.dark{border-color:rgba(0,0,0,0.1);border-top-color:var(--navy)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-overlay{position:fixed;inset:0;background:rgba(10,22,40,0.85);z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;gap:16px;opacity:0;pointer-events:none;transition:opacity .3s;}
+.loading-overlay.show{opacity:1;pointer-events:all}
+.loading-overlay .loading-spinner{width:40px;height:40px;border-width:4px}
+.loading-title{font-size:1rem;font-weight:600}
+.loading-sub{font-size:0.8rem;color:rgba(255,255,255,0.65);text-align:center;max-width:260px}
+.pres-overlay{position:fixed;inset:0;z-index:500;background:#0a1628;display:none;flex-direction:column;overflow:hidden;}
+.pres-overlay.open{display:flex}
+.pres-header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.08);flex-shrink:0;}
+.pres-brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;font-size:1.05rem}
+.pres-body{flex:1;overflow-y:auto;padding:20px 16px;-webkit-overflow-scrolling:touch}
+.pres-kit-hero{background:linear-gradient(135deg,#1a2a4a,#243550);border-radius:16px;padding:28px 20px;text-align:center;margin-bottom:20px;border:1px solid rgba(240,192,64,0.2);}
+.pres-icon{font-size:5rem;margin-bottom:12px;display:block}
+.pres-name{font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:6px}
+.pres-desc{font-size:0.9rem;color:rgba(255,255,255,0.65);max-width:320px;margin:0 auto}
+.pres-price-box{background:rgba(240,192,64,0.12);border:2px solid rgba(240,192,64,0.4);border-radius:14px;padding:20px;text-align:center;margin-bottom:20px;}
+.pres-price-main{font-size:3rem;font-weight:900;color:#f0c040;line-height:1}
+.pres-price-sub{font-size:0.9rem;color:rgba(255,255,255,0.6);margin-top:4px}
+.pres-price-inst{font-size:1rem;color:rgba(255,255,255,0.8);margin-top:8px}
+.pres-features-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.pres-feat{background:rgba(255,255,255,0.06);border-radius:12px;padding:14px 12px;display:flex;align-items:center;gap:10px;border:1px solid rgba(255,255,255,0.08);}
+.pres-feat i{color:#f0c040;font-size:1rem;flex-shrink:0}
+.pres-feat span{font-size:0.8rem;color:rgba(255,255,255,0.85);font-weight:500}
+.pres-compare{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:12px;padding:16px;margin-bottom:20px;}
+.pres-compare-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:0.85rem}
+.pres-compare-row:last-child{border-bottom:none}
+.pres-compare-row .lbl{color:rgba(255,255,255,0.6)}
+.pres-compare-row .seguxat{color:#f0c040;font-weight:700}
+.pres-compare-row .rival{color:#ef4444;text-decoration:line-through;font-size:0.8rem}
+.pres-nav{display:flex;gap:10px;padding:16px;background:rgba(255,255,255,0.04);border-top:1px solid rgba(255,255,255,0.08);flex-shrink:0}
+.pres-dots{display:flex;justify-content:center;gap:6px;margin-bottom:16px}
+.pres-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);cursor:pointer;transition:all .2s}
+.pres-dot.active{background:#f0c040;width:20px;border-radius:4px}
+.camera-modal{position:fixed;inset:0;z-index:400;background:#000;display:none;flex-direction:column;}
+.camera-modal.open{display:flex}
+.camera-video{flex:1;object-fit:cover;width:100%}
+.camera-overlay{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.camera-frame{width:85%;max-width:360px;height:220px;border:3px solid rgba(240,192,64,0.9);border-radius:12px;position:relative;box-shadow:0 0 0 2000px rgba(0,0,0,0.55);}
+.camera-frame-label{position:absolute;bottom:-36px;left:50%;transform:translateX(-50%);color:#f0c040;font-size:0.8rem;font-weight:600;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,0.8);}
+.cam-corner{position:absolute;width:22px;height:22px;border-color:#f0c040;border-style:solid;border-width:0}
+.cc-tl{top:-2px;left:-2px;border-top-width:4px;border-left-width:4px;border-radius:4px 0 0 0}
+.cc-tr{top:-2px;right:-2px;border-top-width:4px;border-right-width:4px;border-radius:0 4px 0 0}
+.cc-bl{bottom:-2px;left:-2px;border-bottom-width:4px;border-left-width:4px;border-radius:0 0 0 4px}
+.cc-br{bottom:-2px;right:-2px;border-bottom-width:4px;border-right-width:4px;border-radius:0 0 4px 0}
+.cam-scanline{position:absolute;left:4px;right:4px;height:2px;background:linear-gradient(90deg,transparent,#f0c040,transparent);animation:camScan 2s linear infinite}
+@keyframes camScan{0%{top:10px}50%{top:calc(100% - 10px)}100%{top:10px}}
+.camera-actions{padding:20px;display:flex;gap:12px;background:#000;flex-shrink:0}
+.btn-capture{flex:1;padding:16px;background:#f0c040;color:#0a1628;border:none;border-radius:12px;font-size:1rem;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-cam-cancel{padding:16px 20px;background:rgba(255,255,255,0.1);color:#fff;border:none;border-radius:12px;font-size:0.9rem;cursor:pointer}
+.profile-header{background:linear-gradient(135deg,var(--navy),var(--navy3));padding:24px 20px 20px;margin:-16px -16px 16px;display:flex;align-items:center;gap:14px;}
+.profile-avatar{width:56px;height:56px;border-radius:16px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--navy);font-weight:800;}
+.profile-name{color:#fff;font-size:1rem;font-weight:700}
+.profile-plan{color:rgba(255,255,255,0.6);font-size:0.78rem;margin-top:2px}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-brand">
+    <div class="header-logo">S</div>
+    <div>
+      <div class="header-title">Seguxat</div>
+      <div class="header-subtitle" id="headerSubtitle">App Comercial</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <div class="comercial-badge" id="comercialName">Comercial</div>
+    <button class="btn-icon" id="btnNotifHeader" title="Notificaciones">
+      <i class="fas fa-bell"></i>
+    </button>
+    <button class="btn-icon" id="btnLogoutHeader" title="Cerrar sesión">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+  </div>
+</header>
+
+<main class="app-main" id="appMain">
+
+  <div class="screen active" id="screen-inicio">
+    <div style="padding:16px 0 0">
+      <div class="card" style="background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border:none">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,0.6);margin-bottom:4px">Hola,</div>
+            <div style="font-size:1.2rem;font-weight:700" id="welcomeName">Comercial</div>
+            <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);margin-top:2px" id="welcomeDate"></div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:0.72rem;color:rgba(255,255,255,0.6)">Objetivo mes</div>
+            <div style="font-size:1.4rem;font-weight:800;color:var(--gold)" id="objetivoActual">0/5</div>
+          </div>
+        </div>
+        <div class="progress-bar" style="margin:14px 0 4px;background:rgba(255,255,255,0.15)">
+          <div class="progress-fill" id="progBar" style="width:0%"></div>
+        </div>
+        <div style="font-size:0.72rem;color:rgba(255,255,255,0.5)" id="progLabel">0% objetivo mensual</div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-box"><div class="val" id="statVisitas">0</div><div class="lbl">Visitas hoy</div></div>
+        <div class="stat-box"><div class="val" id="statContratos">0</div><div class="lbl">Contratos</div></div>
+        <div class="stat-box"><div class="val" id="statMes">0</div><div class="lbl">Este mes</div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Acciones rápidas</div>
+        <div class="card-desc">Inicia un proceso de venta o consulta</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <button class="btn btn-primary btn-full" id="btnNuevaVisitaInicio" style="flex-direction:column;gap:4px;height:70px">
+            <i class="fas fa-user-plus" style="font-size:1.2rem"></i>
+            <span>Nueva visita</span>
+          </button>
+          <button class="btn btn-gold btn-full" id="btnVerCatalogoInicio" style="flex-direction:column;gap:4px;height:70px">
+            <i class="fas fa-boxes" style="font-size:1.2rem"></i>
+            <span>Ver catálogo</span>
+          </button>
+          <button class="btn btn-outline btn-full" id="btnMisVisitasInicio" style="flex-direction:column;gap:4px;height:70px">
+            <i class="fas fa-list" style="font-size:1.2rem"></i>
+            <span>Mis visitas</span>
+          </button>
+          <button class="btn btn-outline btn-full" id="btnSimuladorInicio" style="flex-direction:column;gap:4px;height:70px">
+            <i class="fas fa-calculator" style="font-size:1.2rem"></i>
+            <span>Simulador</span>
+          </button>
+        </div>
+      </div>
+      <div class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+          <div class="card-title" style="margin-bottom:0">Últimas visitas</div>
+          <button class="btn btn-outline btn-sm" id="btnVerTodasVisitas">Ver todas</button>
+        </div>
+        <div id="ultimasVisitas">
+          <div style="text-align:center;color:var(--text2);font-size:0.82rem;padding:20px 0">
+            <i class="fas fa-inbox" style="font-size:2rem;opacity:0.3;display:block;margin-bottom:8px"></i>
+            Aún no hay visitas hoy
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-visita">
+    <div style="padding:16px 0 0">
+      <div class="wizard-steps" id="wizardSteps">
+        <div class="wizard-step active" data-step="1"><div class="step-dot">1</div><div class="step-label">DNI/NIE<br>Frontal</div></div>
+        <div class="wizard-step" data-step="2"><div class="step-dot">2</div><div class="step-label">DNI/NIE<br>Trasera</div></div>
+        <div class="wizard-step" data-step="3"><div class="step-dot">3</div><div class="step-label">Datos<br>Verificados</div></div>
+        <div class="wizard-step" data-step="4"><div class="step-dot">4</div><div class="step-label">Scoring<br>CRM</div></div>
+        <div class="wizard-step" data-step="5"><div class="step-dot">5</div><div class="step-label">Kit &amp;<br>Oferta</div></div>
+        <div class="wizard-step" data-step="6"><div class="step-dot">6</div><div class="step-label">Contrato<br>&amp; Firma</div></div>
+      </div>
+
+      <div id="step-1">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-id-card" style="color:var(--gold);margin-right:6px"></i>Escanear DNI / NIE – Cara frontal</div>
+          <div class="card-desc">Coloca la cara frontal del documento en el recuadro y haz foto o sube imagen</div>
+          <div class="scanner-area" id="scannerFront">
+            <video id="videoFront" style="width:100%;max-height:220px;border-radius:8px;object-fit:cover;display:none"></video>
+            <img id="previewFront" style="display:none;max-width:100%;max-height:200px;border-radius:8px;object-fit:contain" alt="Vista previa frontal">
+            <div id="scanFrontPlaceholder">
+              <div class="scanner-icon"><i class="fas fa-id-card"></i></div>
+              <div class="scanner-text"><strong>Cara frontal</strong><br>Toca para fotografiar o seleccionar imagen</div>
+            </div>
+          </div>
+          <input type="file" id="fileFront" accept="image/*" capture="environment" style="display:none">
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button class="btn btn-outline btn-sm" id="btnCamaraFront" style="flex:1"><i class="fas fa-camera"></i> Cámara</button>
+            <button class="btn btn-outline btn-sm" id="btnGaleriaFront" style="flex:1"><i class="fas fa-image"></i> Galería</button>
+            <button class="btn btn-gold btn-sm" id="btnDemoFront" style="flex:1"><i class="fas fa-magic"></i> Demo</button>
+          </div>
+          <div id="ocrLoadingFront" style="display:none;margin-top:12px;text-align:center;">
+            <div style="font-size:0.85rem;color:var(--gold);margin-bottom:6px;"><i class="fas fa-spinner fa-spin"></i> Analizando documento con OCR…</div>
+            <div style="background:var(--navy2);border-radius:8px;height:8px;overflow:hidden;">
+              <div id="ocrProgressBar" style="width:0%;height:100%;background:var(--gold);border-radius:8px;transition:width .2s;"></div>
+            </div>
+          </div>
+          <div id="ocrFrontResult" style="display:none">
+            <div class="ocr-result">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px">
+                <i class="fas fa-check-circle" style="color:var(--green)"></i>
+                <span style="font-size:0.82rem;font-weight:600;color:var(--green)">Documento reconocido</span>
+              </div>
+              <div class="ocr-field"><span class="ocr-label">Nombre completo</span><span class="ocr-value" id="ocrNombre">–</span></div>
+              <div class="ocr-field"><span class="ocr-label">DNI / NIE</span><span class="ocr-value" id="ocrDni">–</span></div>
+              <div class="ocr-field"><span class="ocr-label">Fecha nacimiento</span><span class="ocr-value" id="ocrFechaNac">–</span></div>
+              <div class="ocr-field"><span class="ocr-label">Sexo</span><span class="ocr-value" id="ocrSexo">–</span></div>
+              <div class="ocr-field"><span class="ocr-label">Caducidad</span><span class="ocr-value" id="ocrCaducidad">–</span></div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-full btn-lg" id="btnStep1Next" disabled style="margin-top:16px">Continuar → Cara trasera</button>
+        </div>
+      </div>
+
+      <div id="step-2" style="display:none">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-id-card" style="color:var(--gold);margin-right:6px"></i>DNI / NIE – Cara trasera</div>
+          <div class="card-desc">Ahora voltea el documento y escanea la cara trasera</div>
+          <div class="scanner-area" id="scannerBack">
+            <img id="previewBack" style="display:none;max-width:100%;max-height:200px;border-radius:8px;object-fit:contain" alt="Vista previa trasera">
+            <div id="scanBackPlaceholder">
+              <div class="scanner-icon"><i class="fas fa-id-card"></i></div>
+              <div class="scanner-text"><strong>Cara trasera</strong><br>Toca para fotografiar o seleccionar imagen</div>
+            </div>
+          </div>
+          <input type="file" id="fileBack" accept="image/*" capture="environment" style="display:none">
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button class="btn btn-outline btn-sm" id="btnGaleriaBack" style="flex:1"><i class="fas fa-camera"></i> Fotografiar</button>
+            <button class="btn btn-gold btn-sm" id="btnDemoBack" style="flex:1"><i class="fas fa-magic"></i> Demo</button>
+          </div>
+          <div id="ocrBackResult" style="display:none">
+            <div class="ocr-result">
+              <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px">
+                <i class="fas fa-check-circle" style="color:var(--green)"></i>
+                <span style="font-size:0.82rem;font-weight:600;color:var(--green)">Cara trasera reconocida</span>
+              </div>
+              <div class="ocr-field"><span class="ocr-label">Lugar nacimiento</span><span class="ocr-value" id="ocrLugar">–</span></div>
+              <div class="ocr-field"><span class="ocr-label">Domicilio</span><span class="ocr-value" id="ocrDomicilio">–</span></div>
+              <div class="ocr-field"><span class="ocr-label">Municipio</span><span class="ocr-value" id="ocrMunicipio">–</span></div>
+              <div class="ocr-field"><span class="ocr-label">CAN</span><span class="ocr-value" id="ocrCan">–</span></div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-full btn-lg" id="btnStep2Next" disabled style="margin-top:16px">Continuar → Verificar datos</button>
+        </div>
+      </div>
+
+      <div id="step-3" style="display:none">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-user-check" style="color:var(--gold);margin-right:6px"></i>Verificar y completar datos</div>
+          <div class="card-desc">Revisa los datos extraídos y completa los campos necesarios</div>
+          <div class="form-group"><label>Nombre completo *</label><input type="text" id="formNombre" placeholder="Nombre y apellidos"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="form-group"><label>DNI / NIE *</label><input type="text" id="formDni" placeholder="12345678A"></div>
+            <div class="form-group"><label>Fecha nacimiento</label><input type="date" id="formFechaNac"></div>
+          </div>
+          <div class="form-group"><label>Teléfono *</label><input type="tel" id="formTelefono" placeholder="6XX XXX XXX"></div>
+          <div class="form-group"><label>Email</label><input type="email" id="formEmail" placeholder="correo@ejemplo.com"></div>
+          <div class="form-group"><label>Dirección instalación *</label><input type="text" id="formDireccion" placeholder="Calle, número, piso..."></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div class="form-group"><label>Población *</label><input type="text" id="formPoblacion" placeholder="Ciudad"></div>
+            <div class="form-group"><label>Código postal</label><input type="text" id="formCp" placeholder="46000" maxlength="5"></div>
+          </div>
+          <div class="form-group"><label>Tipo de inmueble</label><select id="formTipo"><option value="">Seleccionar...</option><option value="vivienda">Vivienda</option><option value="negocio">Negocio / Local</option><option value="oficina">Oficina</option><option value="industria">Nave industrial</option><option value="comunidad">Comunidad de vecinos</option></select></div>
+          <div class="form-group"><label>Observaciones</label><textarea id="formObs" placeholder="Notas adicionales sobre el cliente o la visita..."></textarea></div>
+          <button class="btn btn-primary btn-full btn-lg" id="btnStep3Next"><i class="fas fa-shield-alt"></i> Verificar con CRM / Scoring</button>
+        </div>
+      </div>
+
+      <div id="step-4" style="display:none">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-chart-line" style="color:var(--gold);margin-right:6px"></i>Análisis KYC &amp; Scoring</div>
+          <div class="card-desc">Verificando identidad, historial CRM y solvencia crediticia</div>
+          <div id="scoringProcess">
+            <div class="check-item checking" id="chk1"><i class="fas fa-circle-notch fa-spin"></i>Validando formato DNI/NIE...</div>
+            <div class="check-item" id="chk2" style="opacity:0.4"><i class="fas fa-circle"></i>Consultando base de datos CRM Seguxat...</div>
+            <div class="check-item" id="chk3" style="opacity:0.4"><i class="fas fa-circle"></i>Verificando lista negra interna...</div>
+            <div class="check-item" id="chk4" style="opacity:0.4"><i class="fas fa-circle"></i>Consultando ASNEF/Morosos...</div>
+            <div class="check-item" id="chk5" style="opacity:0.4"><i class="fas fa-circle"></i>Calculando scoring solvencia...</div>
+            <div class="check-item" id="chk6" style="opacity:0.4"><i class="fas fa-circle"></i>Generando decisión automática...</div>
+          </div>
+          <div id="scoringResult" style="display:none">
+            <div class="scoring-ring">
+              <svg width="120" height="120" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#e2e8f0" stroke-width="10"/>
+                <circle id="scoreCircle" cx="60" cy="60" r="50" fill="none" stroke="#10b981" stroke-width="10" stroke-dasharray="314" stroke-dashoffset="314" stroke-linecap="round" style="transition:stroke-dashoffset 1.5s ease"/>
+              </svg>
+              <div class="score-text"><div class="score-num" id="scoreNum" style="color:var(--green)">0</div><div class="score-lbl">/ 100</div></div>
+            </div>
+            <div id="scoringChecks"></div>
+            <div id="decisionBox"></div>
+            <div id="btnScoringNext" style="display:none"><button class="btn btn-primary btn-full btn-lg" id="btnGoStep5"><i class="fas fa-boxes"></i> Seleccionar kit &amp; oferta</button></div>
+            <div id="btnScoringReject" style="display:none"><button class="btn btn-outline btn-full" id="btnCancelVisita"><i class="fas fa-times"></i> Finalizar visita</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="step-5" style="display:none">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-boxes" style="color:var(--gold);margin-right:6px"></i>Seleccionar kit &amp; oferta</div>
+          <div class="card-desc">Elige el kit más adecuado para el cliente</div>
+          <div class="kits-grid" id="kitsGrid"></div>
+          <div id="kitSeleccionado" style="display:none">
+            <div style="background:#fffbeb;border:2px solid var(--gold);border-radius:10px;padding:14px;margin-top:4px">
+              <div style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);margin-bottom:4px">
+                <i class="fas fa-check-circle" style="color:var(--gold)"></i>
+                Kit seleccionado: <span id="kitSelNombre"></span>
+              </div>
+              <div style="font-size:0.8rem;color:var(--text2)">Cuota: <strong id="kitSelCuota"></strong> / mes | Instalación: <strong id="kitSelInstalacion"></strong></div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-full btn-lg" id="btnKitNext" disabled style="margin-top:16px"><i class="fas fa-file-contract"></i> Generar contrato</button>
+        </div>
+      </div>
+
+      <div id="step-6" style="display:none">
+        <div class="card">
+          <div class="card-title"><i class="fas fa-file-signature" style="color:var(--gold);margin-right:6px"></i>Contrato &amp; Firma digital</div>
+          <div class="card-desc">Revisa el contrato y recoge la firma del cliente</div>
+          <div class="contract-section">
+            <h4><i class="fas fa-user" style="color:var(--gold)"></i> Datos del contratante</h4>
+            <div class="highlight-row"><span>Nombre</span><span class="val" id="cnNombre">–</span></div>
+            <div class="highlight-row"><span>DNI/NIE</span><span class="val" id="cnDni">–</span></div>
+            <div class="highlight-row"><span>Teléfono</span><span class="val" id="cnTel">–</span></div>
+            <div class="highlight-row"><span>Dirección</span><span class="val" id="cnDir">–</span></div>
+          </div>
+          <div class="contract-section">
+            <h4><i class="fas fa-shield-alt" style="color:var(--gold)"></i> Servicio contratado</h4>
+            <div class="highlight-row"><span>Kit</span><span class="val" id="cnKit">–</span></div>
+            <div class="highlight-row"><span>Cuota mensual</span><span class="val" id="cnCuota">–</span></div>
+            <div class="highlight-row"><span>Instalación</span><span class="val" id="cnInst">–</span></div>
+            <div class="highlight-row"><span>Permanencia</span><span class="val" id="cnPerm">–</span></div>
+            <div class="highlight-row"><span>CRA 24h</span><span class="val" style="color:var(--green)">✓ Incluida</span></div>
+          </div>
+          <div class="contract-section">
+            <h4><i class="fas fa-file-alt" style="color:var(--gold)"></i> Condiciones generales</h4>
+            <ul>
+              <li>Servicio de seguridad con central receptora de alarmas 24h homologada EN 50518</li>
+              <li>Permanencia mínima según modalidad elegida. Penalización por baja anticipada</li>
+              <li>Mantenimiento incluido durante el período de permanencia</li>
+              <li>Datos personales tratados según RGPD. Responsable: Seguxat S.L.</li>
+              <li>El cliente declara ser mayor de edad y propietario/autorizado de la instalación</li>
+            </ul>
+          </div>
+          <div style="background:#eff6ff;border-radius:10px;padding:12px;margin-bottom:14px">
+            <label style="display:flex;gap:10px;align-items:flex-start;cursor:pointer">
+              <input type="checkbox" id="checkRgpd" style="width:16px;height:16px;flex-shrink:0;margin-top:2px">
+              <span style="font-size:0.78rem;color:var(--text2);line-height:1.5">He leído y acepto las <strong>condiciones generales del servicio</strong> y el tratamiento de mis datos según la <strong>Política de Privacidad</strong> de Seguxat (RGPD)</span>
+            </label>
+          </div>
+          <div style="margin-bottom:14px">
+            <label style="margin-bottom:8px;display:block">Firma del cliente *</label>
+            <div class="sig-canvas-wrap"><canvas id="sigCanvas"></canvas></div>
+            <div class="sig-actions">
+              <button class="btn btn-outline btn-sm" id="btnLimpiarFirma"><i class="fas fa-eraser"></i> Limpiar</button>
+              <div style="flex:1"></div>
+              <div id="sigStatus" style="font-size:0.75rem;color:var(--text2);display:flex;align-items:center;gap:4px"><i class="fas fa-pen-nib" style="opacity:0.4"></i> Esperando firma...</div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-full btn-lg" id="btnFinalizar" disabled><i class="fas fa-check-double"></i> Firmar y enviar a CRM</button>
+          <button class="btn btn-outline btn-full" style="margin-top:8px" id="btnWhatsapp"><i class="fab fa-whatsapp" style="color:#25D366"></i> Enviar resumen por WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-catalogo">
+    <div style="padding:16px 0 0">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div>
+          <h2 style="font-size:1.1rem;font-weight:700;color:var(--navy)">Catálogo de kits</h2>
+          <p style="font-size:0.78rem;color:var(--text2)">Toca un kit para ver la ficha completa</p>
+        </div>
+        <button class="btn btn-gold btn-sm" id="btnPresentar" style="gap:6px"><i class="fas fa-tv"></i> Presentar</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px">
+        <button class="btn btn-primary btn-sm cat-filter active" data-filter="">🔍 Todos</button>
+        <button class="btn btn-outline btn-sm cat-filter" data-filter="hogar">🏠 Hogar</button>
+        <button class="btn btn-outline btn-sm cat-filter" data-filter="negocio">🏢 Negocio</button>
+        <button class="btn btn-outline btn-sm cat-filter" data-filter="comunidad">🏘️ Comunidad</button>
+      </div>
+      <div id="catalogoGrid" class="kits-grid"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-simulador">
+    <div style="padding:16px 0 0">
+      <div class="card">
+        <div class="card-title"><i class="fas fa-calculator" style="color:var(--gold);margin-right:6px"></i>Simulador de cuotas</div>
+        <div class="card-desc">Calcula la oferta óptima para el cliente</div>
+        <div class="sim-param">
+          <div class="sim-label">Kit seleccionado</div>
+          <select id="simKit" style="border:none;background:transparent;font-size:1rem;font-weight:700;color:var(--navy);width:100%;padding:0;cursor:pointer">
+            <option value="basico">Kit Básico Hogar — 19.90€/m</option>
+            <option value="estandar">Kit Estándar Hogar — 27.90€/m</option>
+            <option value="premium">Kit Premium Hogar — 39.90€/m</option>
+            <option value="negocio-s">Kit Negocio S — 34.90€/m</option>
+            <option value="negocio-m">Kit Negocio M — 49.90€/m</option>
+            <option value="negocio-l">Kit Negocio L — 79.90€/m</option>
+            <option value="comunidad">Kit Comunidad — 44.90€/m</option>
+            <option value="sentinel-x">Sentinel-X Mayor — 22.90€/m</option>
+          </select>
+        </div>
+        <div class="sim-param">
+          <div class="sim-label">Permanencia: <span id="simPermanenciaVal">24 meses</span></div>
+          <input type="range" class="range-input" id="simPermanencia" min="12" max="60" step="12" value="24">
+          <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text2);margin-top:4px"><span>12m</span><span>24m</span><span>36m</span><span>48m</span><span>60m</span></div>
+        </div>
+        <div class="sim-param">
+          <div class="sim-label">Descuento aplicado: <span id="simDescuentoVal">0%</span></div>
+          <input type="range" class="range-input" id="simDescuento" min="0" max="30" step="5" value="0">
+          <div style="display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text2);margin-top:4px"><span>0%</span><span>10%</span><span>20%</span><span>30%</span></div>
+        </div>
+        <div class="sim-param">
+          <div class="sim-label">Financiación instalación</div>
+          <select id="simFinanciacion">
+            <option value="0">Pago único instalación</option>
+            <option value="12">Financiar en 12 meses</option>
+            <option value="24">Financiar en 24 meses</option>
+            <option value="0-incluida">Instalación incluida en permanencia 36m+</option>
+          </select>
+        </div>
+        <div class="sim-result">
+          <div style="font-size:0.8rem;color:rgba(255,255,255,0.7);margin-bottom:4px">RESUMEN DE LA OFERTA</div>
+          <div class="sim-result-grid">
+            <div class="sim-result-item"><div class="val" id="simCuotaMes">–</div><div class="lbl">Cuota / mes</div></div>
+            <div class="sim-result-item"><div class="val" id="simInstalacion">–</div><div class="lbl">Instalación</div></div>
+            <div class="sim-result-item"><div class="val" id="simTotalContrato">–</div><div class="lbl">Total contrato</div></div>
+            <div class="sim-result-item"><div class="val" id="simAhorro">–</div><div class="lbl">Ahorro vs pvp</div></div>
+          </div>
+          <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.15)">
+            <div style="font-size:0.72rem;color:rgba(255,255,255,0.6)">Comparativa con Securitas Direct:</div>
+            <div style="font-size:0.8rem;color:var(--gold);font-weight:600" id="simComparativa">–</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+          <button class="btn btn-gold btn-full" id="btnUsarEnVisita"><i class="fas fa-user-plus"></i> Usar en visita</button>
+          <button class="btn btn-outline btn-full" id="btnShareOffer"><i class="fas fa-share-alt"></i> Compartir oferta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-visitas">
+    <div style="padding:16px 0 0">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <div>
+          <h2 style="font-size:1.1rem;font-weight:700;color:var(--navy)">Mis visitas</h2>
+          <p style="font-size:0.78rem;color:var(--text2)" id="visitasCount">Cargando...</p>
+        </div>
+        <button class="btn btn-gold btn-sm" id="btnNuevaVisitaLista"><i class="fas fa-plus"></i> Nueva</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px">
+        <button class="btn btn-primary btn-sm filter-btn active" data-filter="all">Todas</button>
+        <button class="btn btn-outline btn-sm filter-btn" data-filter="approved">✅ Aprobadas</button>
+        <button class="btn btn-outline btn-sm filter-btn" data-filter="pending">🟡 Pendientes</button>
+        <button class="btn btn-outline btn-sm filter-btn" data-filter="rejected">❌ Rechazadas</button>
+      </div>
+      <div id="visitasList"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen-perfil">
+    <div style="padding:16px 0 0">
+      <div class="card" style="background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border:none;text-align:center">
+        <div style="width:70px;height:70px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:1.8rem;font-weight:800;color:var(--navy)" id="profileAvatar">C</div>
+        <div style="font-size:1.1rem;font-weight:700" id="profileName">Comercial</div>
+        <div style="font-size:0.8rem;color:rgba(255,255,255,0.6);margin-top:2px" id="profileZona">Zona Valencia</div>
+        <div style="display:flex;justify-content:center;gap:24px;margin-top:16px">
+          <div style="text-align:center"><div style="font-size:1.4rem;font-weight:800;color:var(--gold)" id="profileMes">0</div><div style="font-size:0.7rem;opacity:0.65">Contratos mes</div></div>
+          <div style="text-align:center"><div style="font-size:1.4rem;font-weight:800;color:var(--gold)" id="profileTotal">0</div><div style="font-size:0.7rem;opacity:0.65">Total histórico</div></div>
+          <div style="text-align:center"><div style="font-size:1.4rem;font-weight:800;color:var(--gold)" id="profileConv">0%</div><div style="font-size:0.7rem;opacity:0.65">Conversión</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Mi cuenta</div>
+        <div class="list-item" id="btnPerfilCatalogo">
+          <div class="list-avatar"><i class="fas fa-boxes"></i></div>
+          <div class="list-info"><div class="list-name">Catálogo de productos</div><div class="list-sub">Ver kits y precios</div></div>
+          <i class="fas fa-chevron-right" style="color:var(--text2)"></i>
+        </div>
+        <div class="list-item" id="btnPerfilLogout">
+          <div class="list-avatar" style="background:linear-gradient(135deg,#ef4444,#dc2626)"><i class="fas fa-sign-out-alt" style="color:#fff"></i></div>
+          <div class="list-info"><div class="list-name">Cerrar sesión</div><div class="list-sub">Salir de la app</div></div>
+          <i class="fas fa-chevron-right" style="color:var(--text2)"></i>
+        </div>
+      </div>
+      <div style="text-align:center;padding:12px;color:var(--text2);font-size:0.72rem">Seguxat App Comercial v2.0 · 2026</div>
+    </div>
+  </div>
+
+</main>
+
+<div class="pres-overlay" id="presOverlay">
+  <div class="pres-header">
+    <div class="pres-brand">
+      <div style="width:28px;height:28px;background:#f0c040;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#0a1628;font-size:0.9rem">S</div>
+      Seguxat · Catálogo
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <span style="font-size:0.72rem;color:rgba(255,255,255,0.45)" id="presKitCounter">1 / 7</span>
+      <button id="btnClosePres" style="background:rgba(255,255,255,0.1);border:none;color:#fff;border-radius:8px;padding:8px 12px;cursor:pointer;font-size:0.8rem"><i class="fas fa-times"></i> Cerrar</button>
+    </div>
+  </div>
+  <div class="pres-body" id="presBody"></div>
+  <div class="pres-dots" id="presDots"></div>
+  <div class="pres-nav">
+    <button class="btn btn-outline btn-full" id="presBtnPrev" style="color:#fff;border-color:rgba(255,255,255,0.3);flex:1"><i class="fas fa-chevron-left"></i> Anterior</button>
+    <button class="btn btn-gold btn-full" id="presBtnNext" style="flex:2">Siguiente <i class="fas fa-chevron-right"></i></button>
+    <button class="btn btn-green btn-full" id="presBtnSelect" style="flex:2;display:none"><i class="fas fa-check"></i> Seleccionar este kit</button>
+  </div>
+</div>
+
+<div class="camera-modal" id="cameraModal">
+  <video class="camera-video" id="cameraVideo" autoplay playsinline muted></video>
+  <div class="camera-overlay">
+    <div class="camera-frame">
+      <div class="cam-corner cc-tl"></div><div class="cam-corner cc-tr"></div>
+      <div class="cam-corner cc-bl"></div><div class="cam-corner cc-br"></div>
+      <div class="cam-scanline"></div>
+      <div class="camera-frame-label" id="cameraFrameLabel">📄 Coloca la cara FRONTAL del DNI/NIE</div>
+    </div>
+  </div>
+  <div class="camera-actions">
+    <button class="btn-cam-cancel" id="btnCameraCancel"><i class="fas fa-times"></i></button>
+    <button class="btn-capture" id="btnCapture"><i class="fas fa-camera"></i> Capturar</button>
+    <button class="btn-cam-cancel" id="btnSwitchCamera"><i class="fas fa-sync"></i></button>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <button class="nav-item active" id="nav-inicio" data-nav="inicio"><i class="fas fa-home nav-icon"></i>Inicio</button>
+  <button class="nav-item" id="nav-visita" data-nav="visita"><i class="fas fa-user-plus nav-icon"></i>Nueva Visita</button>
+  <button class="nav-item" id="nav-catalogo" data-nav="catalogo"><i class="fas fa-boxes nav-icon"></i>Catálogo</button>
+  <button class="nav-item" id="nav-simulador" data-nav="simulador"><i class="fas fa-calculator nav-icon"></i>Simulador</button>
+  <button class="nav-item" id="nav-perfil" data-nav="perfil"><i class="fas fa-user nav-icon"></i>Perfil</button>
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-title" id="loadingTitle">Procesando...</div>
+  <div class="loading-sub" id="loadingSub">Por favor espera</div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-desc" id="modalDesc"></div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+var STATE = {
+  comercial: JSON.parse(localStorage.getItem('seguxat_comercial') || 'null') || {
+    id: 'COM001', nombre: 'Carlos García', zona: 'Valencia Norte', email: 'carlos@seguxat.com'
+  },
+  visitas: JSON.parse(localStorage.getItem('seguxat_visitas') || '[]'),
+  currentStep: 1,
+  kycData: {},
+  selectedKit: null,
+  signatureData: null,
+  scoringResult: null,
+  currentFilter: 'all'
+};
+
+var KITS = [
+  { id:'basico', nombre:'Kit Básico Hogar', tipo:'hogar', icon:'🏠', componentes:['Central WiFi 4 zonas','1 Sensor puerta/ventana','1 Detector PIR 12m','1 Sirena interior 85dB','Mando a distancia','App móvil iOS/Android'], instalacion:149, cuotaMes:19.90, pvpRef:27.90, permanencia:'24 meses', descripcion:'Protección básica para pisos y apartamentos', color:'#3b82f6', specs:{zonas:4,sensores:2,camaras:0,conexion:'WiFi',bateria:'12h',certificacion:'EN 50131'} },
+  { id:'estandar', nombre:'Kit Estándar Hogar', tipo:'hogar', icon:'🏡', componentes:['Central GSM+WiFi 8 zonas','2 Detectores PIR 15m','2 Sensores puerta/ventana','1 Sirena exterior homologada','Teclado LCD','Notificación SMS+App','Conexión CRA 24h'], instalacion:249, cuotaMes:27.90, pvpRef:36.90, permanencia:'24 meses', descripcion:'Ideal para chalets y viviendas unifamiliares', color:'#10b981', popular:true, specs:{zonas:8,sensores:4,camaras:0,conexion:'GSM+WiFi',bateria:'24h',certificacion:'EN 50131 Grado 2'} },
+  { id:'premium', nombre:'Kit Premium Hogar', tipo:'hogar', icon:'🏰', componentes:['Central 4G+WiFi 16 zonas','4 Detectores PIR con cámara','4 Sensores puerta/ventana','2 Cámaras HD 1080p exterior','1 Sirena ext. + 1 interior','Videoverificación CRA 24h','Teclado táctil color','Detector humo/CO'], instalacion:349, cuotaMes:39.90, pvpRef:54.90, permanencia:'24 meses', descripcion:'Máxima seguridad con videovigilancia incluida', color:'#8b5cf6', specs:{zonas:16,sensores:8,camaras:2,conexion:'4G+WiFi',bateria:'48h',certificacion:'EN 50131 Grado 3'} },
+  { id:'negocio-s', nombre:'Kit Negocio S', tipo:'negocio', icon:'🏪', componentes:['Central IP 8 zonas','2 Detectores PIR doble tecnología','2 Sensores apertura','1 Sirena homologada 110dB','1 Contacto pánico','CRA 24h + acuse recibo','Batería 48h'], instalacion:299, cuotaMes:34.90, pvpRef:46.90, permanencia:'36 meses', descripcion:'Para pequeños comercios, bares y tiendas', color:'#f59e0b', specs:{zonas:8,sensores:4,camaras:0,conexion:'IP+GSM',bateria:'48h',certificacion:'EN 50131 Grado 2'} },
+  { id:'negocio-m', nombre:'Kit Negocio M', tipo:'negocio', icon:'🏢', componentes:['Central IP profesional 16 zonas','4 Detectores PIR anti-enmascaramiento','3 Sensores apertura','2 Cámaras HD 2MP interior','1 Cámara exterior 4MP','1 Sirena exterior','Videoverificación CRA','Lector tarjetas acceso'], instalacion:499, cuotaMes:49.90, pvpRef:67.90, permanencia:'36 meses', descripcion:'Oficinas medianas y locales comerciales', color:'#ef4444', specs:{zonas:16,sensores:7,camaras:3,conexion:'IP+4G',bateria:'72h',certificacion:'EN 50131 Grado 3'} },
+  { id:'negocio-l', nombre:'Kit Negocio L', tipo:'negocio', icon:'🏭', componentes:['Central IP 32 zonas BMS','8 Detectores PIR industrial','6 Sensores apertura reforzados','4 Cámaras 4K PoE exterior','2 Sirenas homologadas ext.','Control acceso biométrico','Integración CRA avanzada','Monitor central 24h','SAI 96h autonomía'], instalacion:899, cuotaMes:79.90, pvpRef:112.90, permanencia:'48 meses', descripcion:'Naves industriales y grandes empresas', color:'#0a1628', specs:{zonas:32,sensores:14,camaras:4,conexion:'IP+4G+Fibra',bateria:'96h',certificacion:'EN 50131 Grado 4'} },
+  { id:'comunidad', nombre:'Kit Comunidad Vecinos', tipo:'comunidad', icon:'🏘️', componentes:['Central portal 8 zonas','4 Sensores zonas comunes','2 Cámaras HD entrada/garaje','Videoportero IP 7"','App vecinos (ilimitada)','CRA 24h panel compartido','Sirena comunitaria','Sensor inundación sótano'], instalacion:599, cuotaMes:44.90, pvpRef:62.90, permanencia:'36 meses', descripcion:'Protección integral para comunidades de propietarios', color:'#6366f1', specs:{zonas:8,sensores:6,camaras:2,conexion:'IP+WiFi',bateria:'48h',certificacion:'EN 50131 Grado 2'} },
+  { id:'sentinel-x', nombre:'Kit Sentinel-X Mayor', tipo:'hogar', icon:'⌚', componentes:['Reloj GPS 4G Sentinel-X','Botón pánico SOS','Detección caída automática','Geocercas personalizadas','App familiar','CRA 24h alertas mayores','Cargador magnético'], instalacion:0, cuotaMes:22.90, pvpRef:31.90, permanencia:'24 meses', descripcion:'Seguridad personal para mayores y personas con Alzheimer', color:'#06b6d4', specs:{zonas:0,sensores:1,camaras:0,conexion:'4G GPS',bateria:'48h',certificacion:'IP67'} }
+];
+
+function escHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+document.querySelectorAll('.nav-item[data-nav]').forEach(function(btn) {
+  btn.addEventListener('click', function() { navTo(this.getAttribute('data-nav')); });
+});
+document.getElementById('btnNotifHeader').addEventListener('click', function() { showToast('No hay notificaciones nuevas'); });
+document.getElementById('btnLogoutHeader').addEventListener('click', logout);
+
+document.getElementById('btnNuevaVisitaInicio').addEventListener('click', iniciarVisita);
+document.getElementById('btnVerCatalogoInicio').addEventListener('click', function() { navTo('catalogo'); });
+document.getElementById('btnMisVisitasInicio').addEventListener('click', function() { navTo('visitas'); });
+document.getElementById('btnSimuladorInicio').addEventListener('click', function() { navTo('simulador'); });
+document.getElementById('btnVerTodasVisitas').addEventListener('click', function() { navTo('visitas'); });
+
+document.getElementById('btnCamaraFront').addEventListener('click', function() { openCamera('front'); });
+document.getElementById('btnGaleriaFront').addEventListener('click', function() { document.getElementById('fileFront').click(); });
+document.getElementById('btnDemoFront').addEventListener('click', function() { simulateScan('front'); });
+document.getElementById('fileFront').addEventListener('change', function() { handleFileCapture('front', this); });
+document.getElementById('btnStep1Next').addEventListener('click', function() { goToStep(2); });
+
+document.getElementById('btnGaleriaBack').addEventListener('click', function() { document.getElementById('fileBack').click(); });
+document.getElementById('btnDemoBack').addEventListener('click', function() { simulateScan('back'); });
+document.getElementById('fileBack').addEventListener('change', function() { handleFileCapture('back', this); });
+document.getElementById('btnStep2Next').addEventListener('click', function() { goToStep(3); });
+
+document.getElementById('btnStep3Next').addEventListener('click', function() { goToStep(4); });
+
+document.getElementById('btnGoStep5').addEventListener('click', function() { goToStep(5); });
+document.getElementById('btnCancelVisita').addEventListener('click', cancelVisita);
+
+document.getElementById('btnKitNext').addEventListener('click', function() { goToStep(6); });
+
+document.getElementById('checkRgpd').addEventListener('change', checkContractReady);
+document.getElementById('btnLimpiarFirma').addEventListener('click', clearSignature);
+document.getElementById('btnFinalizar').addEventListener('click', finalizarContrato);
+document.getElementById('btnWhatsapp').addEventListener('click', compartirContratoWhatsapp);
+
+document.querySelectorAll('.cat-filter').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var filter = this.getAttribute('data-filter');
+    document.querySelectorAll('.cat-filter').forEach(function(b) { b.classList.remove('btn-primary'); b.classList.add('btn-outline'); });
+    this.classList.add('btn-primary'); this.classList.remove('btn-outline');
+    renderCatalogo(filter || null);
+  });
+});
+document.getElementById('btnPresentar').addEventListener('click', function() { openPresentacion(false); });
+
+document.getElementById('simKit').addEventListener('change', calcularSim);
+document.getElementById('simPermanencia').addEventListener('input', function() { document.getElementById('simPermanenciaVal').textContent = this.value + ' meses'; calcularSim(); });
+document.getElementById('simDescuento').addEventListener('input', function() { document.getElementById('simDescuentoVal').textContent = this.value + '%'; calcularSim(); });
+document.getElementById('simFinanciacion').addEventListener('change', calcularSim);
+document.getElementById('btnUsarEnVisita').addEventListener('click', function() { iniciarVisita(); showToast('Simulación cargada en nueva visita', 'success'); });
+document.getElementById('btnShareOffer').addEventListener('click', shareOffer);
+
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var filter = this.getAttribute('data-filter');
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('btn-primary'); b.classList.add('btn-outline'); });
+    this.classList.add('btn-primary'); this.classList.remove('btn-outline');
+    STATE.currentFilter = filter;
+    renderVisitas();
+  });
+});
+document.getElementById('btnNuevaVisitaLista').addEventListener('click', iniciarVisita);
+
+document.getElementById('btnPerfilCatalogo').addEventListener('click', function() { navTo('catalogo'); });
+document.getElementById('btnPerfilLogout').addEventListener('click', logout);
+
+document.getElementById('btnClosePres').addEventListener('click', closePresentacion);
+document.getElementById('presBtnPrev').addEventListener('click', function() { presNav(-1); });
+document.getElementById('presBtnNext').addEventListener('click', function() { presNav(1); });
+document.getElementById('presBtnSelect').addEventListener('click', presSelectCurrent);
+
+document.getElementById('btnCameraCancel').addEventListener('click', closeCamera);
+document.getElementById('btnCapture').addEventListener('click', captureFromCamera);
+document.getElementById('btnSwitchCamera').addEventListener('click', switchCamera);
+
+document.getElementById('modalOverlay').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+
+document.addEventListener('DOMContentLoaded', function() { initApp(); });
+
+function initApp() {
+  var c = STATE.comercial;
+  document.getElementById('comercialName').textContent = c.nombre.split(' ')[0];
+  document.getElementById('welcomeName').textContent = c.nombre;
+  document.getElementById('profileName').textContent = c.nombre;
+  document.getElementById('profileZona').textContent = c.zona;
+  document.getElementById('profileAvatar').textContent = c.nombre.charAt(0).toUpperCase();
+  var now = new Date();
+  document.getElementById('welcomeDate').textContent = now.toLocaleDateString('es-ES', {weekday:'long', day:'numeric', month:'long'});
+  updateStats();
+  renderCatalogo();
+  renderKitsGrid();
+  calcularSim();
+  initSignature();
+  renderVisitas();
+}
+
+function navTo(section) {
+  document.querySelectorAll('.screen').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
+  var screenMap = { inicio:'screen-inicio', visita:'screen-visita', catalogo:'screen-catalogo', simulador:'screen-simulador', visitas:'screen-visitas', perfil:'screen-perfil' };
+  var screenId = screenMap[section] || ('screen-' + section);
+  var screen = document.getElementById(screenId);
+  if (screen) screen.classList.add('active');
+  var navEl = document.getElementById('nav-' + section);
+  if (navEl) navEl.classList.add('active');
+  document.getElementById('appMain').scrollTop = 0;
+  var subtitles = { inicio:'App Comercial', visita:'Nueva visita', catalogo:'Catálogo', simulador:'Simulador', visitas:'Mis visitas', perfil:'Mi perfil' };
+  document.getElementById('headerSubtitle').textContent = subtitles[section] || 'App Comercial';
+}
+
+function updateStats() {
+  var today = new Date().toDateString();
+  var thisMonth = new Date().toISOString().slice(0, 7);
+  var visitas = STATE.visitas;
+  var hoy = 0; var contratos = 0; var mes = 0;
+  visitas.forEach(function(v) {
+    if (new Date(v.fecha).toDateString() === today) hoy++;
+    if (v.estado === 'aprobado') contratos++;
+    if (v.fecha.startsWith(thisMonth) && v.estado === 'aprobado') mes++;
+  });
+  var conv = visitas.length > 0 ? Math.round((contratos / visitas.length) * 100) : 0;
+  document.getElementById('statVisitas').textContent = hoy;
+  document.getElementById('statContratos').textContent = contratos;
+  document.getElementById('statMes').textContent = mes;
+  document.getElementById('profileMes').textContent = mes;
+  document.getElementById('profileTotal').textContent = contratos;
+  document.getElementById('profileConv').textContent = conv + '%';
+  var objetivo = 5;
+  document.getElementById('objetivoActual').textContent = mes + '/' + objetivo;
+  var pct = Math.min(100, Math.round((mes / objetivo) * 100));
+  document.getElementById('progBar').style.width = pct + '%';
+  document.getElementById('progLabel').textContent = pct + '% objetivo mensual';
+  renderUltimasVisitas();
+}
+
+function renderUltimasVisitas() {
+  var cont = document.getElementById('ultimasVisitas');
+  var today = new Date().toDateString();
+  var hoy = STATE.visitas.filter(function(v) { return new Date(v.fecha).toDateString() === today; }).slice(-3).reverse();
+  if (!hoy.length) {
+    cont.innerHTML = '<div style="text-align:center;color:var(--text2);font-size:0.82rem;padding:20px 0"><i class="fas fa-inbox" style="font-size:2rem;opacity:0.3;display:block;margin-bottom:8px"></i>Aún no hay visitas hoy</div>';
+    return;
+  }
+  cont.innerHTML = hoy.map(function(v) {
+    var badgeCls = v.estado === 'aprobado' ? 'badge-green' : (v.estado === 'rechazado' ? 'badge-red' : 'badge-orange');
+    var badgeTxt = v.estado === 'aprobado' ? '✓ Aprobado' : (v.estado === 'rechazado' ? '✗ Rechaz.' : 'Pendiente');
+    return '<div class="list-item"><div class="list-avatar"><i class="fas fa-user"></i></div><div class="list-info"><div class="list-name">' + escHtml(v.nombre) + '</div><div class="list-sub">' + escHtml(v.kit) + ' · ' + escHtml(v.hora) + '</div></div><span class="badge ' + badgeCls + '">' + badgeTxt + '</span></div>';
+  }).join('');
+}
+
+function iniciarVisita() {
+  STATE.currentStep = 1;
+  STATE.kycData = {};
+  STATE.selectedKit = null;
+  STATE.signatureData = null;
+  STATE.scoringResult = null;
+  resetWizard();
+  var pf = document.getElementById('previewFront'); if (pf) pf.style.display = 'none';
+  var sfp = document.getElementById('scanFrontPlaceholder'); if (sfp) sfp.style.display = 'block';
+  var ofr = document.getElementById('ocrFrontResult'); if (ofr) ofr.style.display = 'none';
+  var b1 = document.getElementById('btnStep1Next'); if (b1) b1.disabled = true;
+  var sf = document.getElementById('scannerFront'); if (sf) sf.classList.remove('captured');
+  var pb = document.getElementById('previewBack'); if (pb) pb.style.display = 'none';
+  var sbp = document.getElementById('scanBackPlaceholder'); if (sbp) sbp.style.display = 'block';
+  var obr = document.getElementById('ocrBackResult'); if (obr) obr.style.display = 'none';
+  var b2 = document.getElementById('btnStep2Next'); if (b2) b2.disabled = true;
+  var sb = document.getElementById('scannerBack'); if (sb) sb.classList.remove('captured');
+  for (var i = 1; i <= 6; i++) { var el = document.getElementById('step-' + i); if (el) el.style.display = (i === 1) ? 'block' : 'none'; }
+  navTo('visita');
+}
+
+function resetWizard() {
+  document.querySelectorAll('.wizard-step').forEach(function(el, i) {
+    el.classList.remove('active', 'done');
+    if (i === 0) el.classList.add('active');
+  });
+}
+
+function goToStep(step) {
+  if (step === 4) {
+    var n = document.getElementById('formNombre').value.trim();
+    var d = document.getElementById('formDni').value.trim();
+    var t = document.getElementById('formTelefono').value.trim();
+    if (!n || !d || !t) { showToast('Completa nombre, DNI y teléfono', 'error'); return; }
+    STATE.kycData.nombre = n; STATE.kycData.dni = d; STATE.kycData.telefono = t;
+    STATE.kycData.email = document.getElementById('formEmail').value;
+    STATE.kycData.direccion = document.getElementById('formDireccion').value;
+    STATE.kycData.poblacion = document.getElementById('formPoblacion').value;
+    STATE.kycData.cp = document.getElementById('formCp').value;
+    STATE.kycData.tipo = document.getElementById('formTipo').value;
+    STATE.kycData.obs = document.getElementById('formObs').value;
+  }
+  STATE.currentStep = step;
+  document.querySelectorAll('.wizard-step').forEach(function(el, i) {
+    el.classList.remove('active', 'done');
+    if (i < step - 1) el.classList.add('done');
+    else if (i === step - 1) el.classList.add('active');
+  });
+  for (var i = 1; i <= 6; i++) { var el = document.getElementById('step-' + i); if (el) el.style.display = (i === step) ? 'block' : 'none'; }
+  document.getElementById('appMain').scrollTop = 0;
+  if (step === 4) runScoring();
+  if (step === 6) fillContractData();
+}
+
+var _camStream = null;
+var _camSide = 'front';
+var _camFacing = 'environment';
+
+function openCamera(side) {
+  _camSide = side;
+  document.getElementById('cameraFrameLabel').textContent = side === 'front' ? '📄 Coloca la cara FRONTAL del DNI/NIE' : '📄 Coloca la cara TRASERA del DNI/NIE';
+  document.getElementById('cameraModal').classList.add('open');
+  startStream();
+}
+
+function startStream() {
+  if (_camStream) { _camStream.getTracks().forEach(function(t) { t.stop(); }); }
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: _camFacing, width: {ideal:1280}, height: {ideal:720} } })
+    .then(function(stream) { _camStream = stream; document.getElementById('cameraVideo').srcObject = stream; })
+    .catch(function() {
+      closeCamera();
+      document.getElementById(_camSide === 'front' ? 'fileFront' : 'fileBack').click();
+      showToast('Abriendo galería (sin permiso de cámara)', 'warning');
+    });
+}
+
+function switchCamera() { _camFacing = _camFacing === 'environment' ? 'user' : 'environment'; startStream(); }
+
+function closeCamera() {
+  if (_camStream) { _camStream.getTracks().forEach(function(t) { t.stop(); }); _camStream = null; }
+  document.getElementById('cameraModal').classList.remove('open');
+}
+
+function captureFromCamera() {
+  var video = document.getElementById('cameraVideo');
+  var canvas = document.createElement('canvas');
+  canvas.width = video.videoWidth || 1280;
+  canvas.height = video.videoHeight || 720;
+  canvas.getContext('2d').drawImage(video, 0, 0);
+  var dataUrl = canvas.toDataURL('image/jpeg', 0.92);
+  closeCamera();
+  processCapture(_camSide, dataUrl, true);
+}
+
+function handleFileCapture(side, input) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) { processCapture(side, e.target.result, true); };
+  reader.readAsDataURL(file);
+}
+
+var _tesseractWorker = null;
+function getTesseractWorker() {
+  if (_tesseractWorker) return Promise.resolve(_tesseractWorker);
+  showToast('⏳ Cargando motor OCR…', 'warning');
+  return Tesseract.createWorker('spa', 1, { logger: function(m) {
+    if (m.status === 'recognizing text') {
+      var pct = Math.round((m.progress || 0) * 100);
+      var el = document.getElementById('ocrProgressBar');
+      if (el) el.style.width = pct + '%';
+    }
+  }}).then(function(worker) { _tesseractWorker = worker; return worker; });
+}
+
+function parseFront(raw) {
+  var text = raw.toUpperCase().replace(/[|]/g, 'I');
+  var result = {};
+  var dniMatch = text.match(/\b([XYZ]\d{7}[A-Z]|\d{8}[TRWAGMYFPDXBNJZSQVHLCKE])\b/);
+  if (dniMatch) result.dni = dniMatch[1];
+  var apellidosM = text.match(/APELLIDOS[:\s]+([A-ZÁÉÍÓÚÑÜ ]+)/);
+  var nombreM = text.match(/NOMBRE[:\s]+([A-ZÁÉÍÓÚÑÜ ]+)/);
+  if (apellidosM && nombreM) { result.nombre = nombreM[1].trim() + ' ' + apellidosM[1].trim(); }
+  else {
+    var mrzLines = text.match(/[A-Z<]{9,}/g);
+    if (mrzLines && mrzLines.length >= 2) { var parts = mrzLines[1].replace(/<+/g, ' ').trim().split(' '); if (parts.length >= 2) result.nombre = parts.slice(1).join(' ') + ' ' + parts[0]; }
+  }
+  var fnacMatch = text.match(/\b(\d{2}[\s\/\-]\d{2}[\s\/\-]\d{2,4})\b/);
+  if (fnacMatch) result.fechaNac = fnacMatch[1].replace(/\s+/g, '/');
+  var sexoM = text.match(/\b(MASCULINO|FEMENINO|MALE|FEMALE|[MF])\b/);
+  if (sexoM) result.sexo = sexoM[1].startsWith('M') ? 'M' : 'F';
+  var cadM = Array.from(text.matchAll(/\b(\d{2}[\s\/]\d{2}[\s\/]\d{2,4})\b/g));
+  if (cadM.length >= 2) result.caducidad = cadM[cadM.length - 1][1].slice(-4);
+  return result;
+}
+
+function parseBack(raw) {
+  var text = raw.toUpperCase();
+  var result = {};
+  var domM = text.match(/(?:DOMICILIO|DIRECCIÓN|CALLE|C\/)[ \s:]*([A-ZÁÉÍÓÚÑÜ0-9\s,\.ºª]+)/);
+  if (domM) result.domicilio = domM[1].trim().replace(/\s+/g, ' ').substring(0, 60);
+  var munM = text.match(/(?:MUNICIPIO|LOCALIDAD|CIUDAD)[\s:]*([A-ZÁÉÍÓÚÑÜ\s]+)/);
+  if (munM) result.municipio = munM[1].trim().substring(0, 40);
+  var lugarM = text.match(/(?:LUGAR DE NACIMIENTO|NACIMIENTO)[\s:]*([A-ZÁÉÍÓÚÑÜ\s]+)/);
+  if (lugarM) result.lugarNac = lugarM[1].trim().substring(0, 40);
+  var canM = text.match(/\b(\d{6})\b/);
+  if (canM) result.can = canM[1];
+  return result;
+}
+
+function simulateScan(side) {
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' }, width: 1280, height: 720 } })
+    .then(function(stream) { launchCameraCapture(side, stream); })
+    .catch(function() { showToast('📁 Sin cámara. Selecciona una imagen del DNI.', 'warning'); launchFileCapture(side); });
+}
+
+function launchCameraCapture(side, stream) {
+  var overlay = document.createElement('div');
+  overlay.id = 'camOverlay';
+  overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;';
+  overlay.innerHTML = '<div style="position:relative;width:100%;max-width:480px;"><video id="camVideo" autoplay playsinline style="width:100%;border-radius:12px;"></video><div style="position:absolute;inset:10%;border:3px solid #f0c040;border-radius:10px;pointer-events:none;"></div></div><div style="color:#fff;font-size:13px;margin:12px 0;text-align:center;">Encuadra el ' + (side === 'front' ? 'FRENTE' : 'REVERSO') + ' del DNI<br>y pulsa <strong>Capturar</strong></div><div style="display:flex;gap:16px;"><button id="btnCapSim" style="background:#f0c040;color:#0a1628;border:none;padding:12px 28px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;">Capturar</button><button id="btnCanSim" style="background:#374151;color:#fff;border:none;padding:12px 28px;border-radius:10px;font-size:16px;cursor:pointer;">Cancelar</button></div>';
+  document.body.appendChild(overlay);
+  var video = document.getElementById('camVideo');
+  video.srcObject = stream;
+  document.getElementById('btnCapSim').onclick = function() {
+    var canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0);
+    stream.getTracks().forEach(function(t) { t.stop(); });
+    document.body.removeChild(overlay);
+    processCapture(side, canvas.toDataURL('image/jpeg', 0.92), true);
+  };
+  document.getElementById('btnCanSim').onclick = function() {
+    stream.getTracks().forEach(function(t) { t.stop(); });
+    document.body.removeChild(overlay);
+  };
+}
+
+function launchFileCapture(side) {
+  var inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = 'image/*';
+  inp.onchange = function(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev) { processCapture(side, ev.target.result, true); };
+    reader.readAsDataURL(file);
+  };
+  inp.click();
+}
+
+function processCapture(side, dataUrl, runOcr) {
+  showToast('🔍 Procesando imagen…', 'warning');
+  if (side === 'front') {
+    document.getElementById('previewFront').src = dataUrl;
+    document.getElementById('previewFront').style.display = 'block';
+    document.getElementById('scanFrontPlaceholder').style.display = 'none';
+    document.getElementById('scannerFront').classList.add('captured');
+    STATE.kycData.frontImage = dataUrl;
+    if (runOcr) {
+      getTesseractWorker().then(function(worker) { return worker.recognize(dataUrl); }).then(function(res) {
+        var text = res.data.text;
+        var loadDiv = document.getElementById('ocrLoadingFront'); if (loadDiv) loadDiv.style.display = 'none';
+        var parsed = parseFront(text);
+        STATE.kycData.nombre   = parsed.nombre   || STATE.kycData.nombre   || '(no detectado)';
+        STATE.kycData.dni      = parsed.dni      || STATE.kycData.dni      || '';
+        STATE.kycData.fechaNac = parsed.fechaNac || STATE.kycData.fechaNac || '';
+        STATE.kycData.sexo     = parsed.sexo     || 'M';
+        STATE.kycData.caducidad = parsed.caducidad || '2030';
+        showOcrFront();
+      }).catch(function() {
+        showToast('⚠️ Error OCR; usando datos de ejemplo.', 'warning');
+        STATE.kycData.nombre = STATE.kycData.nombre || 'Demo Usuario';
+        STATE.kycData.dni    = STATE.kycData.dni    || '12345678A';
+        showOcrFront();
+      });
+      var loadDiv = document.getElementById('ocrLoadingFront');
+      if (loadDiv) loadDiv.style.display = 'block';
+    } else { setTimeout(showOcrFront, 800); }
+  } else {
+    document.getElementById('previewBack').src = dataUrl;
+    document.getElementById('previewBack').style.display = 'block';
+    document.getElementById('scanBackPlaceholder').style.display = 'none';
+    document.getElementById('scannerBack').classList.add('captured');
+    STATE.kycData.backImage = dataUrl;
+    if (runOcr) {
+      getTesseractWorker().then(function(worker) { return worker.recognize(dataUrl); }).then(function(res) {
+        var parsed = parseBack(res.data.text);
+        STATE.kycData.domicilio = parsed.domicilio || 'Calle Mayor, 12 3º A';
+        STATE.kycData.municipio = parsed.municipio || 'Xàtiva (Valencia)';
+        STATE.kycData.lugarNac  = parsed.lugarNac  || 'Valencia';
+        STATE.kycData.can       = parsed.can       || '';
+        showOcrBack();
+      }).catch(function() {
+        showToast('⚠️ Error OCR; usando datos de ejemplo.', 'warning');
+        STATE.kycData.domicilio = 'Calle Mayor, 12 3º A';
+        STATE.kycData.municipio = 'Xàtiva (Valencia)';
+        STATE.kycData.lugarNac  = 'Valencia';
+        showOcrBack();
+      });
+    } else { setTimeout(showOcrBack, 800); }
+  }
+}
+
+function showOcrFront() {
+  document.getElementById('ocrNombre').textContent    = STATE.kycData.nombre   || '—';
+  document.getElementById('ocrDni').textContent       = STATE.kycData.dni      || '—';
+  document.getElementById('ocrFechaNac').textContent  = STATE.kycData.fechaNac || '—';
+  document.getElementById('ocrSexo').textContent      = STATE.kycData.sexo === 'F' ? 'Femenino' : 'Masculino';
+  document.getElementById('ocrCaducidad').textContent = STATE.kycData.caducidad ? '12/' + STATE.kycData.caducidad : '—';
+  document.getElementById('ocrFrontResult').style.display = 'block';
+  if (STATE.kycData.nombre) document.getElementById('formNombre').value = STATE.kycData.nombre;
+  if (STATE.kycData.dni)    document.getElementById('formDni').value    = STATE.kycData.dni;
+  document.getElementById('btnStep1Next').disabled = false;
+  showToast('✓ Cara frontal reconocida', 'success');
+}
+
+function showOcrBack() {
+  document.getElementById('ocrLugar').textContent     = STATE.kycData.lugarNac  || '—';
+  document.getElementById('ocrDomicilio').textContent = STATE.kycData.domicilio  || '—';
+  document.getElementById('ocrMunicipio').textContent = STATE.kycData.municipio  || '—';
+  document.getElementById('ocrCan').textContent       = STATE.kycData.can        || '—';
+  document.getElementById('ocrBackResult').style.display = 'block';
+  if (STATE.kycData.domicilio) document.getElementById('formDireccion').value = STATE.kycData.domicilio;
+  var pobMatch = (STATE.kycData.municipio || '').match(/([^(]+)/);
+  if (pobMatch) document.getElementById('formPoblacion').value = pobMatch[1].trim();
+  document.getElementById('formCp').value = '46800';
+  document.getElementById('btnStep2Next').disabled = false;
+  showToast('✓ Cara trasera reconocida', 'success');
+}
+
+function runScoring() {
+  document.getElementById('scoringProcess').style.display = 'block';
+  document.getElementById('scoringResult').style.display = 'none';
+  var dniValido = /^[0-9]{8}[A-Z]$|^[XYZ][0-9]{7}[A-Z]$/.test((STATE.kycData.dni || '').toUpperCase());
+  var enListaNegra = checkBlacklist(STATE.kycData.dni);
+  var pasaAsnef = Math.random() > 0.12;
+  var checks = [
+    { id:'chk1', label:'Validando formato DNI/NIE...', delay:700,  ok: dniValido },
+    { id:'chk2', label:'Consultando base de datos CRM Seguxat...', delay:1200, ok: !enListaNegra },
+    { id:'chk3', label:'Verificando lista negra interna...', delay:900,  ok: !enListaNegra },
+    { id:'chk4', label:'Consultando ASNEF/Morosos...', delay:1400, ok: pasaAsnef },
+    { id:'chk5', label:'Calculando scoring solvencia...', delay:1000, ok: true },
+    { id:'chk6', label:'Generando decisión automática...', delay:600,  ok: true }
+  ];
+  var allOk = dniValido && !enListaNegra && pasaAsnef;
+  var failedAt = null;
+  var totalDelay = 0;
+  checks.forEach(function(c, i) {
+    totalDelay += c.delay;
+    (function(check, idx, delay) {
+      setTimeout(function() {
+        var result = check.ok;
+        if (!result && failedAt === null) { failedAt = idx; allOk = false; }
+        var el = document.getElementById(check.id);
+        el.style.opacity = '1';
+        if (failedAt === idx) { el.className = 'check-item fail'; el.innerHTML = '<i class="fas fa-times-circle"></i> ' + check.label.replace('...','') + ': <strong>NO APTO</strong>'; }
+        else if (failedAt === null || idx < failedAt) { el.className = 'check-item ok'; el.innerHTML = '<i class="fas fa-check-circle"></i> ' + check.label.replace('...','') + ': OK'; }
+        if (i < checks.length - 1) {
+          var next = document.getElementById(checks[idx + 1].id);
+          if (next) { next.style.opacity = '1'; next.className = 'check-item checking'; next.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> ' + checks[idx + 1].label; }
+        }
+        if (idx === checks.length - 1) { setTimeout(function() { showScoringResult(allOk); }, 400); }
+      }, delay);
+    })(c, i, totalDelay);
+  });
+}
+
+function checkBlacklist(dni) {
+  var blacklist = JSON.parse(localStorage.getItem('seguxat_blacklist') || '[]');
+  return blacklist.some(function(b) { return b.dni === dni; });
+}
+
+function showScoringResult(approved) {
+  document.getElementById('scoringProcess').style.display = 'none';
+  document.getElementById('scoringResult').style.display = 'block';
+  var score = approved ? (65 + Math.floor(Math.random() * 30)) : (15 + Math.floor(Math.random() * 25));
+  STATE.scoringResult = { approved: approved, score: score };
+  var circle = document.getElementById('scoreCircle');
+  var offset = 314 - (score / 100) * 314;
+  var color = score >= 70 ? 'var(--green)' : (score >= 40 ? 'var(--orange)' : 'var(--red)');
+  circle.style.stroke = color;
+  setTimeout(function() { circle.style.strokeDashoffset = offset; }, 100);
+  animateNumber('scoreNum', 0, score, 1500, color);
+  var dec = document.getElementById('decisionBox');
+  if (approved) {
+    dec.innerHTML = '<div class="decision-box approved"><div class="decision-icon">✅</div><div class="decision-title" style="color:#166534">¡APROBADO!</div><div class="decision-desc" style="color:#166534">Score ' + score + '/100 · El cliente pasa todos los filtros.</div></div>';
+    document.getElementById('btnScoringNext').style.display = 'block';
+    document.getElementById('btnScoringReject').style.display = 'none';
+    showToast('✅ Cliente aprobado · Score: ' + score, 'success');
+  } else {
+    dec.innerHTML = '<div class="decision-box rejected"><div class="decision-icon">❌</div><div class="decision-title" style="color:#991b1b">NO APTO</div><div class="decision-desc" style="color:#991b1b">Score ' + score + '/100 · No procede contrato.</div></div>';
+    document.getElementById('btnScoringNext').style.display = 'none';
+    document.getElementById('btnScoringReject').style.display = 'block';
+    showToast('❌ Cliente no apto · Score: ' + score, 'error');
+    saveVisita('rechazado');
+  }
+}
+
+function cancelVisita() { navTo('inicio'); updateStats(); }
+
+function compartirContratoWhatsapp() {
+  var k = STATE.kycData;
+  var kit = STATE.selectedKit;
+  if (!kit) { showToast('Selecciona un kit primero', 'error'); return; }
+  var tel = (k.telefono || '').replace(/\s/g, '');
+  var msg = encodeURIComponent('🛡️ *Oferta Seguxat* para ' + (k.nombre || 'usted') + '\n\n📦 *' + kit.nombre + '*\n💶 Cuota: ' + kit.cuotaMes.toFixed(2) + '€/mes\n🔧 Instalación: ' + kit.instalacion + '€\n📋 Permanencia: ' + kit.permanencia + '\n✅ CRA 24h homologada EN 50518 incluida\n\n📞 Más info: www.seguxat.com');
+  var url = tel ? 'https://wa.me/34' + tel + '?text=' + msg : 'https://wa.me/?text=' + msg;
+  window.open(url, '_blank');
+}
+
+function renderKitsGrid(filter) {
+  var grid = document.getElementById('kitsGrid');
+  if (!grid) return;
+  var kits = filter ? KITS.filter(function(k) { return k.tipo === filter; }) : KITS;
+  grid.innerHTML = kits.map(function(kit) { return buildKitCard(kit, true); }).join('');
+  kits.forEach(function(kit) {
+    var el = document.getElementById('kit-' + kit.id);
+    if (el) el.addEventListener('click', function() { selectKit(kit.id); });
+  });
+}
+
+function renderCatalogo(filter) {
+  var grid = document.getElementById('catalogoGrid');
+  if (!grid) return;
+  var kits = filter ? KITS.filter(function(k) { return k.tipo === filter; }) : KITS;
+  grid.innerHTML = kits.map(function(kit) { return buildKitCardCatalogo(kit); }).join('');
+  kits.forEach(function(kit) {
+    var el = document.getElementById('cat-' + kit.id);
+    if (el) el.addEventListener('click', function() { openKitDetail(kit.id); });
+    var shareBtn = document.getElementById('share-' + kit.id);
+    if (shareBtn) shareBtn.addEventListener('click', function(e) { e.stopPropagation(); compartirKit(kit.id); });
+  });
+}
+
+function buildKitCardCatalogo(kit) {
+  var compIcons = {Central:'fa-microchip', Detector:'fa-radiation', Sensor:'fa-door-open', Sirena:'fa-volume-up', Camara:'fa-camera', App:'fa-mobile-alt', SMS:'fa-sms', Video:'fa-video'};
+  function getIcon(comp) { var keys = Object.keys(compIcons); for (var i = 0; i < keys.length; i++) { if (comp.indexOf(keys[i]) !== -1) return compIcons[keys[i]]; } return 'fa-check'; }
+  var featuresHtml = kit.componentes.slice(0, 5).map(function(c) { return '<div class="kit-feature"><i class="fas ' + getIcon(c) + '" style="color:' + kit.color + ';font-size:0.6rem"></i>' + escHtml(c) + '</div>'; }).join('');
+  if (kit.componentes.length > 5) featuresHtml += '<div class="kit-feature">+' + (kit.componentes.length - 5) + ' más</div>';
+  return '<div class="kit-card" id="cat-' + kit.id + '">' +
+    '<div style="background:linear-gradient(135deg,' + kit.color + '18,' + kit.color + '30);padding:20px;text-align:center;border-bottom:1px solid var(--border)">' +
+    '<div style="font-size:3.5rem;margin-bottom:6px">' + kit.icon + '</div>' +
+    '<div class="kit-name">' + escHtml(kit.nombre) + (kit.popular ? '&nbsp;<span class="badge badge-green" style="font-size:0.6rem">Popular</span>' : '') + '</div>' +
+    '<div style="font-size:0.75rem;color:var(--text2);margin-top:2px">' + escHtml(kit.descripcion) + '</div></div>' +
+    '<div style="padding:14px">' +
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">' +
+    '<div><span style="font-size:1.3rem;font-weight:800;color:var(--navy)">' + kit.cuotaMes.toFixed(2) + '€</span><span style="font-size:0.75rem;color:var(--text2)">/mes</span></div>' +
+    '<div style="text-align:right"><div style="font-size:0.8rem;font-weight:600;color:var(--gold2)">' + kit.instalacion + '€</div><div style="font-size:0.65rem;color:var(--text2)">instalación</div></div></div>' +
+    '<div class="kit-features">' + featuresHtml + '</div>' +
+    '<div style="display:flex;gap:8px;margin-top:12px">' +
+    '<button class="btn btn-outline btn-sm" id="share-' + kit.id + '" style="flex:1;font-size:0.72rem"><i class="fas fa-share-alt"></i> Compartir</button>' +
+    '</div></div></div>';
+}
+
+function compartirKit(id) {
+  var kit = KITS.find(function(k) { return k.id === id; });
+  if (!kit) return;
+  var txt = '🛡️ ' + kit.nombre + ' — Seguxat\n✅ Desde ' + kit.cuotaMes.toFixed(2) + '€/mes\n📦 Instalación: ' + kit.instalacion + '€\n🏠 ' + kit.descripcion + '\n📞 www.seguxat.com';
+  if (navigator.share) navigator.share({title: kit.nombre, text: txt});
+  else if (navigator.clipboard) navigator.clipboard.writeText(txt).then(function() { showToast('Ficha copiada al portapapeles ✓', 'success'); });
+}
+
+function buildKitCard(kit, selectable) {
+  var featuresHtml = kit.componentes.slice(0, 4).map(function(c) {
+    return '<div class="kit-feature"><i class="fas fa-check" style="color:var(--green);font-size:0.6rem"></i>' + escHtml(c) + '</div>';
+  }).join('');
+  if (kit.componentes.length > 4) featuresHtml += '<div class="kit-feature">+' + (kit.componentes.length - 4) + ' más</div>';
+  var checkHtml = selectable ? '<div class="kit-selected-check" id="check-' + kit.id + '" style="display:none"><i class="fas fa-check"></i></div>' : '';
+  var tipoBadge = kit.tipo === 'hogar' ? '<span class="badge badge-blue">🏠 Hogar</span>' : (kit.tipo === 'comunidad' ? '<span class="badge badge-purple">🏘️ Comunidad</span>' : '<span class="badge badge-orange">🏢 Negocio</span>');
+  return '<div class="kit-card" id="kit-' + kit.id + '">' +
+    '<div class="kit-image-placeholder" style="background:linear-gradient(135deg,' + kit.color + '22,' + kit.color + '44)"><span style="font-size:2.5rem">' + kit.icon + '</span></div>' +
+    '<div class="kit-header"><div><div class="kit-name">' + escHtml(kit.nombre) + (kit.popular ? ' <span class="badge badge-green" style="font-size:0.6rem">Popular</span>' : '') + '</div><div style="font-size:0.75rem;color:var(--text2);margin-top:2px">' + escHtml(kit.descripcion) + '</div></div>' + checkHtml + '</div>' +
+    '<div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0">' +
+    '<div><div class="kit-price">' + kit.cuotaMes.toFixed(2) + '€<span class="kit-cuota">/mes</span></div><div style="font-size:0.7rem;color:var(--text2)">Instalación: ' + kit.instalacion + '€</div></div>' +
+    tipoBadge + '</div>' +
+    '<div class="kit-features">' + featuresHtml + '</div></div>';
+}
+
+function selectKit(id) {
+  document.querySelectorAll('.kit-card').forEach(function(c) { c.classList.remove('selected'); });
+  document.querySelectorAll('[id^="check-"]').forEach(function(c) { c.style.display = 'none'; });
+  STATE.selectedKit = KITS.find(function(k) { return k.id === id; });
+  if (!STATE.selectedKit) return;
+  var card = document.getElementById('kit-' + id);
+  if (card) card.classList.add('selected');
+  var chkEl = document.getElementById('check-' + id);
+  if (chkEl) chkEl.style.display = 'flex';
+  document.getElementById('kitSeleccionado').style.display = 'block';
+  document.getElementById('kitSelNombre').textContent = STATE.selectedKit.nombre;
+  document.getElementById('kitSelCuota').textContent = STATE.selectedKit.cuotaMes.toFixed(2) + '€';
+  document.getElementById('kitSelInstalacion').textContent = STATE.selectedKit.instalacion + '€';
+  document.getElementById('btnKitNext').disabled = false;
+  showToast('Kit seleccionado: ' + STATE.selectedKit.nombre, 'success');
+}
+
+function openKitDetail(id) {
+  var kit = KITS.find(function(k) { return k.id === id; });
+  if (!kit) return;
+  document.getElementById('modalTitle').textContent = kit.icon + ' ' + kit.nombre;
+  document.getElementById('modalDesc').textContent = kit.descripcion;
+  document.getElementById('modalContent').innerHTML = '<div style="margin-bottom:12px"><strong>' + kit.cuotaMes.toFixed(2) + '€/mes</strong> · Instalación: ' + kit.instalacion + '€ · Permanencia: ' + kit.permanencia + '</div><div>' + kit.componentes.map(function(c) { return '<div style="padding:4px 0;font-size:0.82rem;">✓ ' + escHtml(c) + '</div>'; }).join('') + '</div><button class="btn btn-gold btn-full" style="margin-top:12px" onclick="closeModal();compartirKit(\'' + id + '\');"><i class="fas fa-share-alt"></i> Compartir kit</button>';
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function fillContractData() {
+  var k = STATE.kycData;
+  var kit = STATE.selectedKit;
+  document.getElementById('cnNombre').textContent = k.nombre || '–';
+  document.getElementById('cnDni').textContent    = k.dni    || '–';
+  document.getElementById('cnTel').textContent    = k.telefono || '–';
+  document.getElementById('cnDir').textContent    = (k.direccion || '–') + (k.poblacion ? ', ' + k.poblacion : '');
+  document.getElementById('cnKit').textContent    = kit ? kit.nombre : '–';
+  document.getElementById('cnCuota').textContent  = kit ? kit.cuotaMes.toFixed(2) + '€/mes' : '–';
+  document.getElementById('cnInst').textContent   = kit ? kit.instalacion + '€ (pago único)' : '–';
+  document.getElementById('cnPerm').textContent   = kit ? kit.permanencia : '–';
+}
+
+function checkContractReady() {
+  var rgpd  = document.getElementById('checkRgpd').checked;
+  var hasSig = STATE.signatureData !== null;
+  document.getElementById('btnFinalizar').disabled = !(rgpd && hasSig);
+}
+
+function finalizarContrato() {
+  if (!document.getElementById('checkRgpd').checked) { showToast('Acepta las condiciones primero', 'error'); return; }
+  if (!STATE.signatureData) { showToast('El cliente debe firmar primero', 'error'); return; }
+  showLoading('Enviando contrato a CRM...', 'Registrando firma digital y notificando CRA');
+  setTimeout(function() {
+    hideLoading();
+    saveVisita('aprobado');
+    updateStats();
+    renderVisitas();
+    showToast('✅ Contrato firmado y enviado · ' + (STATE.kycData.nombre || ''), 'success');
+    setTimeout(function() { navTo('inicio'); }, 1800);
+  }, 2200);
+}
+
+function saveVisita(estado) {
+  var visita = {
+    id: Date.now(),
+    nombre: STATE.kycData.nombre || 'Desconocido',
+    dni: STATE.kycData.dni || '',
+    telefono: STATE.kycData.telefono || '',
+    direccion: STATE.kycData.direccion || '',
+    kit: STATE.selectedKit ? STATE.selectedKit.nombre : '–',
+    kitId: STATE.selectedKit ? STATE.selectedKit.id : null,
+    cuota: STATE.selectedKit ? STATE.selectedKit.cuotaMes : 0,
+    instalacion: STATE.selectedKit ? STATE.selectedKit.instalacion : 0,
+    score: STATE.scoringResult ? STATE.scoringResult.score : 0,
+    estado: estado,
+    fecha: new Date().toISOString(),
+    hora: new Date().toLocaleTimeString('es-ES', {hour:'2-digit', minute:'2-digit'}),
+    comercial: STATE.comercial.nombre
+  };
+  STATE.visitas.push(visita);
+  localStorage.setItem('seguxat_visitas', JSON.stringify(STATE.visitas));
+  return visita;
+}
+
+function initSignature() {
+  var canvas = document.getElementById('sigCanvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var drawing = false;
+  function resizeCanvas() { var rect = canvas.getBoundingClientRect(); canvas.width = rect.width || 320; canvas.height = 160; }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+  function getPos(e) {
+    var r = canvas.getBoundingClientRect();
+    if (e.touches && e.touches.length) return { x: e.touches[0].clientX - r.left, y: e.touches[0].clientY - r.top };
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  }
+  function startDraw(e) { e.preventDefault(); drawing = true; var p = getPos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); }
+  function draw(e) {
+    if (!drawing) return; e.preventDefault();
+    var p = getPos(e);
+    ctx.lineWidth = 2.5; ctx.lineCap = 'round'; ctx.strokeStyle = '#0a1628';
+    ctx.lineTo(p.x, p.y); ctx.stroke();
+    STATE.signatureData = canvas.toDataURL();
+    document.getElementById('sigStatus').innerHTML = '<i class="fas fa-check-circle" style="color:var(--green)"></i> Firma registrada';
+    checkContractReady();
+  }
+  function endDraw() { drawing = false; }
+  canvas.addEventListener('mousedown', startDraw);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', endDraw);
+  canvas.addEventListener('touchstart', startDraw, {passive:false});
+  canvas.addEventListener('touchmove', draw, {passive:false});
+  canvas.addEventListener('touchend', endDraw);
+}
+
+function clearSignature() {
+  var canvas = document.getElementById('sigCanvas');
+  if (!canvas) return;
+  canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+  STATE.signatureData = null;
+  document.getElementById('sigStatus').innerHTML = '<i class="fas fa-pen-nib" style="opacity:0.4"></i> Esperando firma...';
+  checkContractReady();
+}
+
+function calcularSim() {
+  var kitId = document.getElementById('simKit').value;
+  var kit = KITS.find(function(k) { return k.id === kitId; }) || KITS[0];
+  var permanencia = parseInt(document.getElementById('simPermanencia').value);
+  var descuento = parseInt(document.getElementById('simDescuento').value);
+  var financiacion = document.getElementById('simFinanciacion').value;
+  var cuotaBase = kit.cuotaMes;
+  var cuotaDesc = cuotaBase * (1 - descuento / 100);
+  var instalacion = (permanencia >= 36 && financiacion === '0-incluida') ? 0 : kit.instalacion;
+  var cuotaFinal = cuotaDesc;
+  if (financiacion !== '0' && financiacion !== '0-incluida') { cuotaFinal = cuotaDesc + (kit.instalacion / parseInt(financiacion)); }
+  var totalContrato = (cuotaFinal * permanencia) + (financiacion === '0' ? instalacion : 0);
+  var ahorro = Math.round((kit.pvpRef * permanencia) - totalContrato);
+  var compRef = kit.pvpRef + 5;
+  document.getElementById('simCuotaMes').textContent = cuotaFinal.toFixed(2) + '€';
+  document.getElementById('simInstalacion').textContent = instalacion === 0 ? 'Gratis 🎁' : instalacion + '€';
+  document.getElementById('simTotalContrato').textContent = totalContrato.toFixed(0) + '€';
+  document.getElementById('simAhorro').textContent = ahorro > 0 ? ahorro + '€ 💰' : '–';
+  document.getElementById('simComparativa').textContent = 'Securitas Direct: ~' + compRef.toFixed(2) + '€/mes · Ahorro Seguxat: ' + (compRef - cuotaFinal).toFixed(2) + '€/mes';
+}
+
+function shareOffer() {
+  var kitId = document.getElementById('simKit').value;
+  var kit = KITS.find(function(k) { return k.id === kitId; }) || KITS[0];
+  var cuota = document.getElementById('simCuotaMes').textContent;
+  var text = '🛡️ Oferta Seguxat - ' + kit.nombre + '\n📦 Desde ' + cuota + '/mes\n🏠 Instalación profesional incluida\n📞 Contacta: www.seguxat.com';
+  if (navigator.share) { navigator.share({ title: 'Oferta Seguxat', text: text }); }
+  else if (navigator.clipboard) { navigator.clipboard.writeText(text).then(function() { showToast('Oferta copiada al portapapeles', 'success'); }); }
+}
+
+function renderVisitas() {
+  var list = document.getElementById('visitasList');
+  if (!list) return;
+  var visitas = STATE.visitas.slice().reverse();
+  if (STATE.currentFilter !== 'all') {
+    visitas = visitas.filter(function(v) {
+      if (STATE.currentFilter === 'approved') return v.estado === 'aprobado';
+      if (STATE.currentFilter === 'rejected') return v.estado === 'rechazado';
+      if (STATE.currentFilter === 'pending')  return v.estado === 'pendiente';
+      return true;
+    });
+  }
+  document.getElementById('visitasCount').textContent = visitas.length + ' visita' + (visitas.length !== 1 ? 's' : '');
+  if (!visitas.length) {
+    list.innerHTML = '<div style="text-align:center;color:var(--text2);font-size:0.82rem;padding:40px 0"><i class="fas fa-search" style="font-size:2rem;opacity:0.3;display:block;margin-bottom:8px"></i>No hay visitas con este filtro</div>';
+    return;
+  }
+  list.innerHTML = visitas.map(function(v) {
+    var bgColor = v.estado === 'aprobado' ? 'linear-gradient(135deg,#059669,#10b981)' : (v.estado === 'rechazado' ? 'linear-gradient(135deg,#dc2626,#ef4444)' : 'linear-gradient(135deg,#d97706,#f59e0b)');
+    var badgeCls = v.estado === 'aprobado' ? 'badge-green' : (v.estado === 'rechazado' ? 'badge-red' : 'badge-orange');
+    var badgeTxt = v.estado === 'aprobado' ? 'Aprobado' : (v.estado === 'rechazado' ? 'Rechazado' : 'Pendiente');
+    var extraHtml = v.estado === 'aprobado' ? '<div style="font-size:0.7rem;color:var(--gold2);font-weight:600;margin-top:4px">' + (v.cuota ? v.cuota.toFixed(2) : '0') + '€/m</div>' : '';
+    return '<div class="list-item"><div class="list-avatar" style="background:' + bgColor + '"><i class="fas fa-user" style="color:#fff"></i></div><div class="list-info"><div class="list-name">' + escHtml(v.nombre) + '</div><div class="list-sub">' + escHtml(v.kit) + ' · Score ' + v.score + '</div><div class="list-sub">' + new Date(v.fecha).toLocaleDateString('es-ES') + ' ' + v.hora + '</div></div><div class="list-meta"><span class="badge ' + badgeCls + '">' + badgeTxt + '</span>' + extraHtml + '</div></div>';
+  }).join('');
+}
+
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (type === 'success' ? ' success' : type === 'error' ? ' error' : type === 'warning' ? ' warning' : '');
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 3000);
+}
+
+function showLoading(title, sub) {
+  document.getElementById('loadingTitle').textContent = title || 'Cargando...';
+  document.getElementById('loadingSub').textContent = sub || '';
+  document.getElementById('loadingOverlay').classList.add('show');
+}
+
+function hideLoading() { document.getElementById('loadingOverlay').classList.remove('show'); }
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+
+function animateNumber(id, from, to, duration, color) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.style.color = color;
+  var start = performance.now();
+  function update(now) {
+    var p = Math.min((now - start) / duration, 1);
+    el.textContent = Math.round(from + (to - from) * p);
+    if (p < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+function logout() { if (confirm('¿Cerrar sesión?')) { window.location.href = '../login.html'; } }
+
+var _presIndex = 0;
+var _presKits = [];
+var _presForVisita = false;
+
+function openPresentacion(forVisita) {
+  _presForVisita = !!forVisita;
+  _presKits = KITS;
+  _presIndex = 0;
+  renderPresSlide();
+  renderPresDots();
+  document.getElementById('presOverlay').classList.add('open');
+}
+
+function closePresentacion() { document.getElementById('presOverlay').classList.remove('open'); }
+function presNav(dir) { _presIndex = Math.max(0, Math.min(_presKits.length - 1, _presIndex + dir)); renderPresSlide(); renderPresDots(); }
+
+function renderPresDots() {
+  var cont = document.getElementById('presDots');
+  cont.innerHTML = _presKits.map(function(_, i) {
+    return '<div class="pres-dot' + (i === _presIndex ? ' active' : '') + '" data-pres-idx="' + i + '"></div>';
+  }).join('');
+  cont.querySelectorAll('.pres-dot').forEach(function(dot) {
+    dot.addEventListener('click', function() { _presIndex = parseInt(this.getAttribute('data-pres-idx')); renderPresSlide(); renderPresDots(); });
+  });
+  document.getElementById('presKitCounter').textContent = (_presIndex + 1) + ' / ' + _presKits.length;
+  document.getElementById('presBtnPrev').style.opacity = _presIndex === 0 ? '0.3' : '1';
+  var isLast = _presIndex === _presKits.length - 1;
+  document.getElementById('presBtnNext').style.display = isLast ? 'none' : 'block';
+  document.getElementById('presBtnSelect').style.display = _presForVisita ? 'block' : 'none';
+}
+
+function renderPresSlide() {
+  var kit = _presKits[_presIndex];
+  var rival = (kit.pvpRef + 5).toFixed(2);
+  var ahorro = ((kit.pvpRef - kit.cuotaMes) * 12).toFixed(0);
+  var featsHtml = kit.componentes.map(function(c) { return '<div class="pres-feat"><i class="fas fa-check-circle"></i><span>' + escHtml(c) + '</span></div>'; }).join('');
+  document.getElementById('presBody').innerHTML =
+    '<div class="pres-kit-hero"><span class="pres-icon">' + kit.icon + '</span><div class="pres-name">' + escHtml(kit.nombre) + '</div><div class="pres-desc">' + escHtml(kit.descripcion) + '</div></div>' +
+    '<div class="pres-price-box"><div class="pres-price-main">' + kit.cuotaMes.toFixed(2) + '<span style="font-size:1.4rem">€</span></div><div class="pres-price-sub">al mes · sin sorpresas</div><div class="pres-price-inst">Instalación profesional: <strong style="color:#f0c040">' + kit.instalacion + '€</strong></div><div style="margin-top:8px;font-size:0.8rem;color:rgba(255,255,255,0.5)">Permanencia: ' + kit.permanencia + '</div></div>' +
+    '<div class="pres-features-grid">' + featsHtml + '</div>' +
+    '<div class="pres-compare"><div style="font-size:0.75rem;color:rgba(255,255,255,0.45);margin-bottom:8px">Comparativa de precio</div><div class="pres-compare-row"><span class="lbl">🛡️ Seguxat</span><span class="seguxat">' + kit.cuotaMes.toFixed(2) + '€/mes</span></div><div class="pres-compare-row"><span class="lbl">🔴 Securitas Direct</span><span class="rival">~' + rival + '€/mes</span></div><div class="pres-compare-row"><span class="lbl">💰 Ahorro anual</span><span class="seguxat">+' + ahorro + '€ al año</span></div></div>';
+}
+
+function presSelectCurrent() {
+  var kit = _presKits[_presIndex];
+  selectKit(kit.id);
+  closePresentacion();
+  navTo('visita');
+  showToast('Kit seleccionado: ' + kit.nombre, 'success');
+}
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js')
+      .then(function(r) { console.log('[SW] Comercial registrado, scope:', r.scope); })
+      .catch(function(e) { console.warn('[SW] Error registro:', e); });
+  });
+}
+</script>
+</body>
+</html>
+

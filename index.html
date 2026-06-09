@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es" prefix="og: https://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seguxat — Alarmas, Relojes GPS SOS Sentinel y Escudo Vecinal | Valencia | Sin Permanencia</title>
+  <meta name="description" content="Seguxat: empresa de seguridad en Valencia. Alarmas para hogar, relojes GPS SOS Sentinel desde 69,99€, Escudo Vecinal exclusivo. CRA 24/7. Solo 12 meses de permanencia. Instalación gratuita.">
+  <link rel="canonical" href="https://www.seguxat.es/">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Seguxat Seguridad S.L.">
+  <meta property="og:title" content="Seguxat — Alarmas, Relojes GPS SOS y Escudo Vecinal | Valencia">
+  <meta property="og:description" content="Seguridad real. Relojes GPS SOS Sentinel desde 69,99€. Alarmas hogar desde 199€. Escudo Vecinal exclusivo. CRA 24/7. Solo 12 meses de permanencia e instalación gratuita.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.seguxat.es/">
+  <meta property="og:site_name" content="Seguxat">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://js.stripe.com/v3/" async></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #0A1628;
+      --primary-dark: #060E1A;
+      --accent: #FF6B00;
+      --accent-hover: #E55D00;
+      --white: #fff;
+      --gray-50: #F9FAFB;
+      --gray-100: #F3F4F6;
+      --gray-200: #E5E7EB;
+      --gray-300: #D1D5DB;
+      --gray-400: #9CA3AF;
+      --gray-500: #6B7280;
+      --gray-600: #4B5563;
+      --gray-700: #374151;
+      --gray-800: #1F2937;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.1);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,.14);
+      --transition: all .2s ease;
+      --transition-slow: all .3s ease;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--gray-800);
+      background: var(--white);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; }
+    .text-center { text-align: center; }
+    .section-heading { font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 800; color: var(--primary); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .section-subheading { font-size: 1.1rem; color: var(--gray-500); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border-radius: var(--radius-md); font-weight: 700; font-size: 0.95rem; cursor: pointer; border: 2px solid transparent; transition: var(--transition); text-decoration: none; }
+    .btn-xl { padding: 16px 36px; font-size: 1.05rem; border-radius: var(--radius-lg); }
+    .btn-lg { padding: 14px 28px; font-size: 1rem; border-radius: var(--radius-md); }
+    .btn-sm { padding: 8px 16px; font-size: 0.82rem; border-radius: var(--radius-sm); }
+    .btn-primary { background: var(--accent); color: var(--white); border-color: var(--accent); }
+    .btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,107,0,.35); }
+    .btn-outline-white { background: transparent; color: var(--white); border-color: rgba(255,255,255,.5); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.1); border-color: var(--white); }
+    .btn-login { background: rgba(255,255,255,.1); color: var(--white); border-color: rgba(255,255,255,.25); }
+    .btn-login:hover { background: rgba(255,255,255,.18); }
+    .btn-full { width: 100%; justify-content: center; }
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(10,22,40,.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      transition: var(--transition);
+    }
+    .navbar.scrolled { background: rgba(10,22,40,.98); box-shadow: 0 2px 20px rgba(0,0,0,.2); }
+    .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .nav-logo-text { font-size: 1.2rem; font-weight: 900; color: var(--white); letter-spacing: -0.02em; }
+    .nav-logo-text span { color: var(--accent); }
+    .nav-menu { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-menu a { color: rgba(255,255,255,.75); font-size: 0.875rem; font-weight: 500; padding: 6px 12px; border-radius: 6px; transition: var(--transition); }
+    .nav-menu a:hover { color: var(--white); background: rgba(255,255,255,.08); }
+    .nav-badge { background: var(--accent); color: var(--white); font-size: 0.6rem; font-weight: 800; padding: 2px 6px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; margin-left: 4px; vertical-align: middle; }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: rgba(255,255,255,.8); border-radius: 2px; transition: var(--transition); }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: var(--primary);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 20px; padding: 40px 24px;
+    }
+    .mobile-menu.active { display: flex; }
+    .mobile-menu a { color: var(--white); font-size: 1.2rem; font-weight: 600; padding: 12px 24px; border-radius: 10px; width: 100%; max-width: 320px; text-align: center; background: rgba(255,255,255,.05); transition: var(--transition); }
+    .mobile-menu a:hover { background: rgba(255,255,255,.1); }
+    .mobile-menu-close { position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,.1); border: none; color: var(--white); font-size: 1.4rem; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .mobile-menu-actions { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 320px; margin-top: 8px; }
+    .hero {
+      background: linear-gradient(160deg, var(--primary) 0%, #0D2044 50%, #0A1628 100%);
+      min-height: calc(100vh - 70px);
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(255,107,0,.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-left { max-width: 640px; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,107,0,.15); border: 1px solid rgba(255,107,0,.3);
+      color: #FF9445; padding: 7px 16px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.5px; margin-bottom: 24px;
+    }
+    .hero-eyebrow .dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; animation: blink 1.5s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .hero h1 { color: var(--white); font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 24px; }
+    .hero h1 .highlight { color: var(--accent); }
+    .hero-sub { font-size: 1.1rem; color: rgba(255,255,255,.7); line-height: 1.7; margin-bottom: 36px; max-width: 520px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+    .hero-stats { display: flex; gap: 36px; padding-top: 36px; border-top: 1px solid rgba(255,255,255,.1); flex-wrap: wrap; }
+    .hero-stat-num { font-size: 1.8rem; font-weight: 800; color: var(--white); line-height: 1; }
+    .hero-stat-label { font-size: 0.78rem; color: rgba(255,255,255,.5); margin-top: 4px; }
+    .hero-layout { display: flex; align-items: center; gap: 64px; padding: 60px 0; min-height: calc(100vh - 70px); }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 32px; }
+    .step-item { text-align: center; padding: 24px 16px; }
+    .step-num { width: 56px; height: 56px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.4rem; font-weight: 900; color: var(--white); }
+    .step-item h3 { font-size: 1rem; font-weight: 800; margin-bottom: 8px; color: var(--primary); }
+    .step-item p { font-size: 0.875rem; color: var(--gray-500); line-height: 1.6; }
+    .cta-section {
+      background: linear-gradient(135deg, var(--accent), #E55D00);
+      padding: 100px 0;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,.08) 0%, transparent 60%);
+    }
+    .cta-inner { position: relative; z-index: 1; }
+    .cta-inner h2 { font-size: clamp(1.8rem, 4.5vw, 3rem); color: var(--white); font-weight: 900; margin-bottom: 16px; }
+    .cta-inner p { font-size: 1.1rem; color: rgba(255,255,255,.85); margin-bottom: 40px; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-note { margin-top: 24px; font-size: 0.85rem; color: rgba(255,255,255,.7); }
+    .footer { background: var(--primary); padding: 72px 0 32px; color: rgba(255,255,255,.65); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-icon { width: 36px; height: 36px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .footer-logo-text { font-size: 1.1rem; font-weight: 900; color: var(--white); }
+    .footer-logo-text span { color: var(--accent); }
+    .footer-desc { font-size: 0.875rem; line-height: 1.7; margin-bottom: 20px; }
+    .footer-contact-item { font-size: 0.82rem; margin-bottom: 8px; }
+    .footer-contact-item a { color: rgba(255,255,255,.7); transition: var(--transition); }
+    .footer-contact-item a:hover { color: var(--white); }
+    .footer-col h5 { color: var(--white); font-size: 0.875rem; font-weight: 700; margin-bottom: 16px; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { font-size: 0.82rem; color: rgba(255,255,255,.6); transition: var(--transition); }
+    .footer-links a:hover { color: var(--white); }
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,.08); margin: 0 0 24px; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 0.78rem; }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { color: rgba(255,255,255,.5); transition: var(--transition); }
+    .footer-bottom-links a:hover { color: var(--white); }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(6px); z-index: 5000; display: none; align-items: center; justify-content: center; padding: 24px; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: var(--white); border-radius: var(--radius-xl); padding: 36px; width: 100%; max-width: 500px; box-shadow: 0 24px 60px rgba(0,0,0,.2); position: relative; }
+    .modal-close { position: absolute; top: 16px; right: 16px; background: var(--gray-100); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+    #confirmBanner { display: none; position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: linear-gradient(90deg, #10B981 0%, #059669 100%); color: #fff; box-shadow: 0 4px 20px rgba(16,185,129,.4); }
+    .banner-inner { max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .banner-close { width: 32px; height: 32px; background: rgba(255,255,255,.2); border: none; border-radius: 50%; color: #fff; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    @media (max-width: 1024px) {
+      .nav-menu { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero-layout { flex-direction: column; align-items: flex-start; min-height: auto; padding: 48px 0; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 16px; }
+      .section { padding: 64px 0; }
+      .hero-actions { flex-direction: column; }
+      .hero-stats { gap: 20px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .cta-btns { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="confirmBanner" role="alert">
+  <div class="banner-inner">
+    <div style="font-size:1.6rem">&#x2705;</div>
+    <div style="flex:1">
+      <strong id="bannerTitle">¡Solicitud recibida correctamente!</strong><br>
+      <span id="bannerSub" style="font-size:0.85rem;opacity:0.92">Uno de nuestros comerciales se pondrá en contacto contigo en menos de 2 horas.</span>
+    </div>
+    <a href="tel:+34611946289" style="background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:8px;padding:8px 16px;font-weight:700;font-size:0.82rem;text-decoration:none;white-space:nowrap">📞 Llamar ahora</a>
+    <button class="banner-close" onclick="closeBanner()" aria-label="Cerrar">&#x2715;</button>
+  </div>
+</div>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-icon">&#x1F6E1;&#xFE0F;</div>
+      <span class="nav-logo-text">Seguxat<span>.es</span></span>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="/alarmas.html">Alarmas</a></li>
+      <li><a href="/escudo-vecinal.html">Escudo Vecinal <span class="nav-badge">ÚNICO</span></a></li>
+      <li><a href="/catalogo.html">Catálogo</a></li>
+      <li><a href="/contacto.html">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="/login.html" class="btn btn-login btn-sm">👤 Mi cuenta</a>
+      <a href="/solicitar-visita.html" class="btn btn-primary btn-sm">Presupuesto gratis</a>
+      <button class="nav-hamburger" onclick="openMobileMenu()" aria-label="Menú"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()">&#x2715;</button>
+  <a href="/alarmas.html">🏠 Alarmas Hogar y Empresa</a>
+  <a href="/escudo-vecinal.html">🛡️ Escudo Vecinal</a>
+  <a href="/contacto.html">📬 Contacto</a>
+  <div class="mobile-menu-actions">
+    <a href="tel:+34611946289" class="btn btn-outline-white btn-full">📞 611946289</a>
+    <a href="/login.html" class="btn btn-outline-white btn-full">👤 Mi cuenta</a>
+    <a href="/pedir-presupuesto.html" class="btn btn-primary btn-full">Presupuesto Gratis</a>
+  </div>
+</div>
+
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-layout">
+      <div class="hero-left hero-content">
+        <div class="hero-eyebrow"><span class="dot"></span>🏆 Empresa local certificada · Xàtiva, Valencia</div>
+        <h1>Alarma con <span class="highlight">instalación gratuita</span><br>en Xàtiva y Valencia</h1>
+        <p class="hero-sub">Conectada a CRA 24/7. Técnicos locales propios. Solo 12 meses de permanencia. Instalación gratuita. Escudo Vecinal exclusivo.</p>
+        <div class="hero-actions">
+          <a href="/solicitar-visita.html" class="btn btn-primary btn-xl">⚡ Te llamamos</a>
+          <a href="tel:+34611946289" class="btn btn-outline-white btn-xl">📞 611946289</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="hero-stat-num">100+</div><div class="hero-stat-label">Familias protegidas</div></div>
+          <div><div class="hero-stat-num">&lt;20s</div><div class="hero-stat-label">Respuesta CRA</div></div>
+          <div><div class="hero-stat-num">24/7</div><div class="hero-stat-label">Monitorización</div></div>
+          <div><div class="hero-stat-num">12 Meses</div><div class="hero-stat-label">Permanencia</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:56px">
+      <h2 class="section-heading">Tu alarma instalada en 4 pasos simples</h2>
+      <p class="section-subheading">Sin tecnicismos, sin burocracia. Desde que nos llamas hasta que tu casa está protegida, en menos de 48 horas.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <h3>Solicita tu estudio gratuito</h3>
+        <p>Rellena el formulario o llámanos. Un asesor te contacta en menos de 2 horas.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <h3>Visita técnica sin compromiso</h3>
+        <p>Un técnico local visita tu hogar y te propone el sistema ideal. Sin coste.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <h3>Instalación gratuita en 2-3 horas</h3>
+        <p>Técnico certificado instala el sistema 100% inalámbrico. Sin obras.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <h3>CRA activa, tú tranquilo</h3>
+        <p>La alarma se conecta a nuestra Central 24/7 al instante.</p>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:40px">
+      <a href="/solicitar-visita.html" class="btn btn-primary btn-lg">Solicitar visita gratuita →</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container text-center cta-inner">
+    <h2>¿Listo para proteger lo que más quieres?</h2>
+    <p>Solicita tu estudio gratuito. Te llamamos en menos de 2 horas.</p>
+    <div class="cta-btns">
+      <a href="/pedir-presupuesto.html" class="btn btn-xl" style="background:white;color:var(--accent);font-weight:800">⚡ Presupuesto gratis</a>
+      <a href="/solicitar-visita.html" class="btn btn-xl btn-outline-white">📋 Solicitar visita</a>
+      <a href="tel:+34611946289" class="btn btn-xl btn-outline-white">📞 611946289</a>
+    </div>
+    <p class="cta-note">Permanencia 12 meses · Instalación gratuita · Precio fijo garantizado</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-icon">🛡️</div>
+          <span class="footer-logo-text">Seguxat<span>.es</span></span>
+        </div>
+        <p class="footer-desc">Empresa de seguridad local en Xàtiva, Valencia.</p>
+        <div class="footer-contact-item">📞 <a href="tel:+34611946289">+34 611946289</a></div>
+        <div class="footer-contact-item">✉️ <a href="mailto:info@seguxat.es">info@seguxat.es</a></div>
+        <div class="footer-contact-item">📍 Xàtiva, Valencia, España</div>
+      </div>
+      <div class="footer-col">
+        <h5>Servicios</h5>
+        <ul class="footer-links">
+          <li><a href="/alarmas.html">Alarmas Hogar</a></li>
+          <li><a href="/escudo-vecinal.html">Escudo Vecinal</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Empresa</h5>
+        <ul class="footer-links">
+          <li><a href="/sobre-nosotros.html">Sobre nosotros</a></li>
+          <li><a href="/contacto.html">Contacto</a></li>
+          <li><a href="/crm.html" style="color:rgba(255,107,0,.5)">🔒 CRM</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="divider">
+    <div class="footer-bottom">
+      <p>© 2025 Seguxat Seguridad S.L. · Todos los derechos reservados</p>
+      <div class="footer-bottom-links">
+        <a href="/privacidad.html">Privacidad</a>
+        <a href="/aviso-legal.html">Aviso Legal</a>
+        <a href="/cookies.html">Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeCheckout()">&#x2715;</button>
+    <div style="margin-bottom:20px">
+      <h4 style="margin:0;color:var(--primary)">Contratar servicio</h4>
+      <p style="margin:0;font-size:0.85rem" id="checkoutProduct">—</p>
+    </div>
+    <form id="checkoutForm">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div><label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:5px">Nombre *</label><input type="text" id="checkoutNombre" style="width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.875rem" required></div>
+        <div><label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:5px">Apellidos *</label><input type="text" id="checkoutApellidos" style="width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.875rem"></div>
+      </div>
+      <div style="margin-top:12px"><label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:5px">Email *</label><input type="email" id="checkoutEmail" style="width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.875rem" required></div>
+      <div style="margin-top:12px"><label style="font-size:0.8rem;font-weight:600;display:block;margin-bottom:5px">Teléfono *</label><input type="tel" id="checkoutTelefono" style="width:100%;padding:9px 12px;border:1.5px solid #e5e7eb;border-radius:8px;font-size:0.875rem" required></div>
+      <button type="submit" style="width:100%;margin-top:16px;background:#0A1628;color:white;border:none;border-radius:8px;padding:14px;font-size:0.95rem;font-weight:700;cursor:pointer" id="stripeBtn">🔒 Continuar con el pago seguro →</button>
+    </form>
+  </div>
+</div>
+
+<script>
+(function() {
+  var navbar = document.getElementById('navbar');
+  if (navbar) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 30) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    });
+  }
+
+  function openMobileMenu() {
+    var m = document.getElementById('mobileMenu');
+    if (m) { m.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  }
+  function closeMobileMenu() {
+    var m = document.getElementById('mobileMenu');
+    if (m) { m.classList.remove('active'); document.body.style.overflow = ''; }
+  }
+  function closeCheckout() {
+    var m = document.getElementById('checkoutModal');
+    if (m) m.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  function closeBanner() {
+    var b = document.getElementById('confirmBanner');
+    if (b) b.style.display = 'none';
+  }
+
+  window.openMobileMenu = openMobileMenu;
+  window.closeMobileMenu = closeMobileMenu;
+  window.closeCheckout = closeCheckout;
+  window.closeBanner = closeBanner;
+
+  var modal = document.getElementById('checkoutModal');
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeCheckout();
+    });
+  }
+
+  var form = document.getElementById('checkoutForm');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('stripeBtn');
+      if (btn) { btn.disabled = true; btn.innerHTML = '⏳ Procesando...'; }
+      setTimeout(function() {
+        if (btn) { btn.disabled = false; btn.innerHTML = '🔒 Continuar con el pago seguro →'; }
+      }, 3000);
+    });
+  }
+
+  (function checkBanner() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('solicitud') !== 'ok') return;
+    var b = document.getElementById('confirmBanner');
+    if (b) b.style.display = 'block';
+    setTimeout(closeBanner, 15000);
+    var url = new URL(window.location.href);
+    url.searchParams.delete('solicitud');
+    window.history.replaceState({}, '', url.toString());
+  })();
+})();
+</script>
+</body>
+</html>
+

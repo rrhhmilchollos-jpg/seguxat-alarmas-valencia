@@ -1,0 +1,18 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "es.seguxat.app.cliente",
+      "sha256_cert_fingerprints": ["REEMPLAZA_CON_TU_SHA256_DEL_KEYSTORE_CLIENTE"]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "es.seguxat.app.instalador",
+      "sha256_cert_fingerprints": ["REEMPLAZA_CON_TU_SHA256_DEL_KEYSTORE_INSTALADOR"]
+    }
+  }
+]
