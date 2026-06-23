@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /privacidad.html
+Disallow: /aviso-legal.html
+Disallow: /cookies.html
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://www.seguxat.es/sitemap.xml
